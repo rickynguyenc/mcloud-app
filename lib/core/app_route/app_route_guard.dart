@@ -3,6 +3,7 @@ import 'package:mcloud/providers/authentication_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'app_global.dart';
+import 'app_route.dart';
 
 class RouteGuard extends AutoRouteGuard {
   RouteGuard(this._tokenNotifier);
@@ -10,11 +11,10 @@ class RouteGuard extends AutoRouteGuard {
 
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) {
-    // if (_tokenNotifier.isAuthenticated) {
-    //   resolver.next();
-    // } else {
-    //   router.pushAndPopUntil(LoginRoute(), predicate: (e) => false);
-    // }
-    resolver.next();
+    if (_tokenNotifier.isAuthenticated) {
+      resolver.next();
+    } else {
+      router.pushAndPopUntil(LoginRoute(), predicate: (e) => true);
+    }
   }
 }

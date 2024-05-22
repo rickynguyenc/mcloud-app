@@ -9,9 +9,12 @@ import 'package:mcloud/providers/authentication_provider.dart';
 import 'package:mcloud/providers/quote_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'core/utils/local_storage.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: Environment.fileName);
+  await UserPreferences.initialize();
   runApp(ProviderScope(child: MyApp()));
 }
 
