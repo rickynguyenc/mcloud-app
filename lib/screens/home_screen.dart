@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gameportalapp/models/quote_model.dart';
-import 'package:gameportalapp/providers/quote_provider.dart';
+import 'package:mcloud/models/quote_model.dart';
+import 'package:mcloud/providers/quote_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../services/quote_service.dart';

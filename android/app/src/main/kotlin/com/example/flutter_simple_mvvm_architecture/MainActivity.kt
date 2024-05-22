@@ -1,4 +1,4 @@
-package com.example.gameportalapp
+package com.example.mcloud
 
 import io.flutter.embedding.android.FlutterActivity
 

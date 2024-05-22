@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:gameportalapp/core/app_dio.dart';
-import 'package:gameportalapp/core/constants/api_constants.dart';
-import 'package:gameportalapp/models/quote_model.dart';
+import 'package:mcloud/core/app_dio.dart';
+import 'package:mcloud/core/constants/api_constants.dart';
+import 'package:mcloud/models/quote_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:retrofit/http.dart';
 part 'quote_service.g.dart';

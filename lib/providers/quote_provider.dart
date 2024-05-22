@@ -1,4 +1,4 @@
-import 'package:gameportalapp/services/quote_service.dart';
+import 'package:mcloud/services/quote_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final quoteProvider = Provider.autoDispose((_) {

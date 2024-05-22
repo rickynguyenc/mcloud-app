@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gameportalapp/core/app_route/app_route.dart';
-import 'package:gameportalapp/core/utils/env.dart';
-import 'package:gameportalapp/providers/authentication_provider.dart';
-import 'package:gameportalapp/providers/quote_provider.dart';
+import 'package:mcloud/core/app_route/app_route.dart';
+import 'package:mcloud/core/utils/env.dart';
+import 'package:mcloud/providers/authentication_provider.dart';
+import 'package:mcloud/providers/quote_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 Future<void> main() async {

@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
-import 'package:gameportalapp/core/utils/env.dart';
+import 'package:mcloud/core/utils/env.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 export 'package:dio/dio.dart';
 

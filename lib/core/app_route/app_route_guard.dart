@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:gameportalapp/providers/authentication_provider.dart';
+import 'package:mcloud/providers/authentication_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'app_global.dart';

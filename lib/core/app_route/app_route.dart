@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:gameportalapp/providers/authentication_provider.dart';
-import 'package:gameportalapp/screens/home_screen.dart';
+import 'package:mcloud/providers/authentication_provider.dart';
+import 'package:mcloud/screens/home_screen.dart';
 import 'app_route_guard.dart';
 part 'app_route.gr.dart';
 

@@ -1,4 +1,4 @@
-import 'package:gameportalapp/core/models/base_model.dart';
+import 'package:mcloud/core/models/base_model.dart';
 
 class BaseQuoteModel {
   String? text;
