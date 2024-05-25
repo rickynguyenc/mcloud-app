@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mcloud/core/app_route/app_route.dart';
 import 'package:mcloud/models/quote_model.dart';
 import 'package:mcloud/providers/quote_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../providers/authentication_provider.dart';
 import '../services/quote_service.dart';
 
 @RoutePage()
@@ -16,6 +18,18 @@ class HomeScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () {
+              ref.read(authProvider).logout();
+              AutoRouter.of(context).replace(const LoginRoute());
+            },
+          )
+        ],
+      ),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(

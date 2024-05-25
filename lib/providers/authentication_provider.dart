@@ -12,13 +12,27 @@ class AuthProvider {
   final Ref ref;
   AuthProvider(this.ref);
   late final _authService = ref.read(authServiceProvider);
-  // bool get isAuthenticated => UserPreferences.instance.getToken() != '';
-  bool get isAuthenticated => false;
-  Future<void> login() async {
+  bool get isAuthenticated => UserPreferences.instance.getToken() != '';
+  // bool get isAuthenticated => false;
+  Future<bool> login() async {
     try {
       final inputFormData = FormData.fromMap({'db': 'tabcom17', 'login': 'admin', 'password': 'quantri1*Tab'});
       await _authService.login(inputFormData);
       UserPreferences.instance.saveToken('token');
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  Future<void> register(String name, String email) async {
+    try {
+      final result = _authService.register({
+        "name": name,
+        "login": email,
+      });
+      print(result);
     } catch (e) {
       print(e);
     }

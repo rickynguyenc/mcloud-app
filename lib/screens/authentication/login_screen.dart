@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mcloud/core/app_route/app_route.dart';
 
+import '../../core/utils/widgets/submit_button_widget.dart';
 import '../../providers/authentication_provider.dart';
 
 @RoutePage()
@@ -191,35 +192,20 @@ class LoginScreen extends HookConsumerWidget {
               height: 28,
             ),
             Container(
-              width: double.infinity,
-              height: 48,
-              decoration: ShapeDecoration(
-                color: Color(0xFF055FA7),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(56),
-                ),
-              ),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF055FA7),
+                width: double.infinity,
+                height: 48,
+                decoration: ShapeDecoration(
+                  color: Color(0xFF055FA7),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(56),
                   ),
                 ),
-                onPressed: () {
-                  context.router.push(LoginWithPasswordRoute());
-                },
-                child: Text(
+                child: SubmitButton(
                   'Đăng nhập bằng mật khẩu',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ),
+                  onPressed: () {
+                    context.router.push(LoginWithPasswordRoute());
+                  },
+                )),
             Spacer(),
             Row(
               mainAxisSize: MainAxisSize.min,
