@@ -16,54 +16,24 @@ class HomeScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: Center(
-        child: _Quote(),
+      body: Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Text('Quotes', style: Theme.of(context).textTheme.titleLarge),
+            const SizedBox(height: 16),
+            Container(
+              height: 200,
+              color: Colors.green,
+              alignment: Alignment.center,
+            )
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _refresh(ref),
         child: Icon(Icons.refresh),
       ),
-    );
-  }
-}
-
-class _Quote extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return FutureBuilder(
-        future: ref.read(quoteServiceProvider).getQuotes({}),
-        builder: (context, AsyncSnapshot<List<BaseQuoteModel>> snapshot) {
-          return ListView.builder(
-            scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.all(30),
-            itemCount: snapshot.data?.length ?? 0,
-            itemBuilder: (context, index) {
-              return Container(
-                padding: EdgeInsets.all(30),
-                width: MediaQuery.of(context).size.width - 60,
-                alignment: Alignment.center,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(snapshot.data![index].text!, style: Theme.of(context).textTheme.headline5),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(snapshot.data![index].author!, style: Theme.of(context).textTheme.subtitle2)
-                  ],
-                ),
-              );
-            },
-          );
-        });
-  }
-}
-
-class ErrorScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text("Error occured"),
     );
   }
 }

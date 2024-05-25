@@ -52,6 +52,7 @@ dependencies:
   hooks_riverpod: ^2.3.6
   # Permission handler
   permission_handler: ^10.4.3
+  flutter_svg: ^2.0.5
 dev_dependencies:
   flutter_test:
     sdk: flutter
