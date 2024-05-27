@@ -13,6 +13,7 @@ import '../services/quote_service.dart';
 
 @RoutePage()
 class HomeScreen extends HookConsumerWidget {
+  final _scrollCtrl = ScrollController();
   void _refresh(WidgetRef ref) {
     ref.refresh(quoteProvider);
   }
@@ -134,6 +135,7 @@ class HomeScreen extends HookConsumerWidget {
             ),
             SizedBox(height: 24),
             SliderBarWidget(
+              aspectRatio: 1.5,
               imgList: [
                 BannerImage(image: 'assets/images/banner_home.png'),
                 BannerImage(image: 'assets/images/banner_home.png'),
@@ -141,69 +143,108 @@ class HomeScreen extends HookConsumerWidget {
               ],
             ),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+              child: Scrollbar(
+                controller: _scrollCtrl,
+                child: SingleChildScrollView(
+                  controller: _scrollCtrl,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: CategoryItemWidget(
-                          'Phần Mềm',
-                          'assets/images/category_1.png',
-                        ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CategoryItemWidget(
+                              'Phần Mềm',
+                              'assets/images/category_1.png',
+                            ),
+                          ),
+                          SizedBox(width: 22),
+                          Expanded(
+                            child: CategoryItemWidget(
+                              'Lưu trữ',
+                              'assets/images/category_2.png',
+                            ),
+                          ),
+                          SizedBox(width: 22),
+                          Expanded(
+                            child: CategoryItemWidget(
+                              'Gói cước',
+                              'assets/images/category_3.png',
+                            ),
+                          ),
+                          SizedBox(width: 22),
+                          Expanded(
+                            child: CategoryItemWidget(
+                              'Đối tác',
+                              'assets/images/category_4.png',
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(width: 22),
-                      Expanded(
-                        child: CategoryItemWidget(
-                          'Lưu trữ',
-                          'assets/images/category_2.png',
-                        ),
+                      SizedBox(height: 35),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Ưu đãi hot',
+                            style: TextStyle(
+                              color: Color(0xFF212121),
+                              fontSize: 18,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            'Xem thêm',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              color: Color(0xFF055FA7),
+                              fontSize: 16,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 0.20,
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(width: 22),
-                      Expanded(
-                        child: CategoryItemWidget(
-                          'Gói cước',
-                          'assets/images/category_3.png',
-                        ),
-                      ),
-                      SizedBox(width: 22),
-                      Expanded(
-                        child: CategoryItemWidget(
-                          'Đối tác',
-                          'assets/images/category_4.png',
-                        ),
+                      SizedBox(height: 16),
+                      SliderBarWidget(aspectRatio: 2.08, width: MediaQuery.of(context).size.width * 0.7, imgList: [
+                        BannerImage(image: 'assets/images/voucher_1.png'),
+                        BannerImage(image: 'assets/images/voucher_1.png'),
+                        BannerImage(image: 'assets/images/voucher_1.png'),
+                        BannerImage(image: 'assets/images/voucher_1.png'),
+                      ]),
+                      SizedBox(height: 35),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Sản phẩm mới',
+                            style: TextStyle(
+                              color: Color(0xFF212121),
+                              fontSize: 18,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            'Xem thêm',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              color: Color(0xFF055FA7),
+                              fontSize: 16,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 0.20,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  SizedBox(height: 35),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Ưu đãi hot',
-                        style: TextStyle(
-                          color: Color(0xFF212121),
-                          fontSize: 18,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      Text(
-                        'Xem thêm',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          color: Color(0xFF055FA7),
-                          fontSize: 16,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: 0.20,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 16),
-                ],
+                ),
               ),
             ),
           ],

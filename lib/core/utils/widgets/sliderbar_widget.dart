@@ -7,8 +7,10 @@ class BannerImage {
 }
 
 class SliderBarWidget extends StatefulWidget {
+  final double? width;
+  final double aspectRatio;
   final List<BannerImage> imgList;
-  SliderBarWidget({super.key, required this.imgList});
+  SliderBarWidget({super.key, required this.imgList, this.width, required this.aspectRatio});
 
   @override
   State<SliderBarWidget> createState() => _SliderBarWidgetState();
@@ -25,15 +27,15 @@ class _SliderBarWidgetState extends State<SliderBarWidget> {
         child: CarouselSlider(
           carouselController: _carouselController,
           options: CarouselOptions(
+            aspectRatio: widget.aspectRatio,
             padEnds: true,
             initialPage: 0,
-            height: 223,
             enlargeCenterPage: true,
             autoPlay: true,
             autoPlayCurve: Curves.fastOutSlowIn,
             enableInfiniteScroll: true,
             autoPlayAnimationDuration: Duration(milliseconds: 800),
-            viewportFraction: 1,
+            viewportFraction: widget.width == null ? 1 : widget.width! / MediaQuery.of(context).size.width,
             onPageChanged: (index, reason) {
               setState(() {
                 _current = index;
@@ -42,7 +44,7 @@ class _SliderBarWidgetState extends State<SliderBarWidget> {
           ),
           items: widget.imgList
               .map((item) => Container(
-                    child: Center(child: Image.asset(item.image, fit: BoxFit.cover, width: 1000)),
+                    child: Center(child: Image.asset(item.image, fit: BoxFit.fitWidth, width: widget.width ?? double.infinity)),
                   ))
               .toList(),
         ),
