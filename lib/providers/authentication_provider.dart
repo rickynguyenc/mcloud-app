@@ -17,8 +17,8 @@ class AuthProvider {
   Future<bool> login() async {
     try {
       final inputFormData = FormData.fromMap({'db': 'tabcom17', 'login': 'admin', 'password': 'quantri1*Tab'});
-      await _authService.login(inputFormData);
-      UserPreferences.instance.saveToken('token');
+      final result = await _authService.login(inputFormData);
+      UserPreferences.instance.saveToken(result.accessToken ?? '');
       return true;
     } catch (e) {
       print(e);

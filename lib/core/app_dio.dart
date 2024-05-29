@@ -3,6 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:mcloud/core/utils/env.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import 'utils/local_storage.dart';
 export 'package:dio/dio.dart';
 
 final dioProvider = Provider((_) => AppDio.getInstance());
@@ -19,9 +21,9 @@ class AppDio with DioMixin implements Dio {
       sendTimeout: const Duration(milliseconds: _defaultConnectTimeout),
       // receiveTimeout: _defaultConnectTimeout,
     );
-    // if (AppStorage.load().token != null) {
-    //   options.headers = {'Authorization': 'Bearer ${AppStorage.load().token}'};
-    // }
+    if (UserPreferences.instance.getToken() != '') {
+      options.headers = {'Authorization': 'Bearer ${UserPreferences.instance.getToken()}'};
+    }
     this.options = options;
     interceptors.add(
       InterceptorsWrapper(

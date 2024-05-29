@@ -36,6 +36,37 @@ class ProductDetailScreen extends HookConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 48),
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              AutoRouter.of(context).pop();
+                            },
+                            icon: Icon(Icons.arrow_back_ios),
+                          ),
+                          SizedBox(width: 16),
+                          Expanded(
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: Text(
+                                'Chi tiết sản phẩm',
+                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 16),
+                          // Cart button
+                          IconButton(
+                            onPressed: () {
+                              AutoRouter.of(context).pushNamed('/cart');
+                            },
+                            icon: Icon(Icons.shopping_cart_outlined),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 24,
+                      ),
                       AspectRatio(
                         aspectRatio: 16 / 9,
                         child: Image.network(
