@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
 class CartScreen extends HookConsumerWidget {
-  const CartScreen({super.key});
+  const CartScreen();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container();

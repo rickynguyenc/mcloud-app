@@ -1,10 +1,10 @@
 // Danh sách sản phẩm
 class ListProductResponse {
-  int? count;
+  num? count;
   dynamic prev;
-  int? current;
+  num? current;
   dynamic next;
-  int? totalPages;
+  num? totalPages;
   List<Product>? result;
 
   ListProductResponse({this.count, this.prev, this.current, this.next, this.totalPages, this.result});
@@ -38,13 +38,13 @@ class ListProductResponse {
 }
 
 class Product {
-  int? id;
+  num? id;
   String? name;
   String? avatarUrl;
   List<AttributeLineIds>? attributeLineIds;
   List<dynamic>? productTemplateImageIds;
   AttributeId? categId;
-  int? listPrice;
+  num? listPrice;
 
   Product({this.id, this.name, this.avatarUrl, this.attributeLineIds, this.productTemplateImageIds, this.categId, this.listPrice});
 
@@ -88,7 +88,7 @@ class Product {
 }
 
 class AttributeLineIds {
-  int? id;
+  num? id;
   AttributeId? attributeId;
   List<ValueIds>? valueIds;
 
@@ -119,7 +119,7 @@ class AttributeLineIds {
 }
 
 class AttributeId {
-  int? id;
+  num? id;
   String? name;
 
   AttributeId({this.id, this.name});
@@ -138,7 +138,7 @@ class AttributeId {
 }
 
 class ValueIds {
-  int? id;
+  num? id;
   String? name;
 
   ValueIds({this.id, this.name});
@@ -158,11 +158,11 @@ class ValueIds {
 
 // Danh mục sản phẩm
 class CategoryProductResponse {
-  int? count;
+  num? count;
   Null? prev;
-  int? current;
+  num? current;
   Null? next;
-  int? totalPages;
+  num? totalPages;
   List<Category>? result;
 
   CategoryProductResponse({this.count, this.prev, this.current, this.next, this.totalPages, this.result});
@@ -196,7 +196,7 @@ class CategoryProductResponse {
 }
 
 class Category {
-  int? id;
+  num? id;
   String? name;
 
   Category({this.id, this.name});

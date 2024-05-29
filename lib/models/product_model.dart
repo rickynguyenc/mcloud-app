@@ -1,8 +1,8 @@
 import 'home_model.dart';
 
 class ProductDetailResponse {
-  int? code;
-  int? status;
+  num? code;
+  num? status;
   List<ProductDetail>? result;
 
   ProductDetailResponse({this.code, this.status, this.result});
@@ -30,14 +30,14 @@ class ProductDetailResponse {
 }
 
 class ProductDetail {
-  int? id;
+  num? id;
   String? name;
   String? avatarUrl;
   List<AttributeLineIds>? attributeLineIds;
   List<dynamic>? productTemplateImageIds;
   AttributeId? categId;
-  int? listPrice;
-  bool? description;
+  num? listPrice;
+  dynamic description;
 
   ProductDetail({this.id, this.name, this.avatarUrl, this.attributeLineIds, this.productTemplateImageIds, this.categId, this.listPrice, this.description});
 
@@ -83,7 +83,7 @@ class ProductDetail {
 }
 
 class AttributeLineIds {
-  int? id;
+  num? id;
   AttributeId? attributeId;
   List<ValueIds>? valueIds;
 
