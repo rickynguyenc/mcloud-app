@@ -81,7 +81,6 @@ class RegisterScreen extends HookConsumerWidget {
                           color: Color(0xFF616161),
                           fontSize: 16,
                           height: 1.7,
-                          fontFamily: 'Inter',
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -167,7 +166,6 @@ class RegisterScreen extends HookConsumerWidget {
                                 style: TextStyle(
                                   color: Color(0xFF64748B),
                                   fontSize: 14,
-                                  fontFamily: 'Inter',
                                   fontWeight: FontWeight.w400,
                                   letterSpacing: -0.56,
                                 ),
@@ -177,7 +175,6 @@ class RegisterScreen extends HookConsumerWidget {
                                     style: TextStyle(
                                       color: Color(0xFF055FA7),
                                       fontSize: 14,
-                                      fontFamily: 'Inter',
                                       fontWeight: FontWeight.w400,
                                       letterSpacing: -0.56,
                                     ),
@@ -225,7 +222,6 @@ class RegisterScreen extends HookConsumerWidget {
                         style: TextStyle(
                           color: Color(0xFF616161),
                           fontSize: 18,
-                          fontFamily: 'Inter',
                           fontWeight: FontWeight.w500,
                           height: 0,
                         ),

@@ -82,7 +82,6 @@ class LoginWithPasswordScreen extends HookConsumerWidget {
                           color: Color(0xFF616161),
                           fontSize: 16,
                           height: 1.7,
-                          fontFamily: 'Inter',
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -166,7 +165,6 @@ class LoginWithPasswordScreen extends HookConsumerWidget {
                               style: TextStyle(
                                 color: Color(0xFF212121),
                                 fontSize: 14,
-                                fontFamily: 'Inter',
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
@@ -180,7 +178,6 @@ class LoginWithPasswordScreen extends HookConsumerWidget {
                         style: TextStyle(
                           color: Color(0xFF055FA7),
                           fontSize: 12,
-                          fontFamily: 'Inter',
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -222,7 +219,6 @@ class LoginWithPasswordScreen extends HookConsumerWidget {
                         style: TextStyle(
                           color: Color(0xFF616161),
                           fontSize: 18,
-                          fontFamily: 'Inter',
                           fontWeight: FontWeight.w500,
                           height: 0,
                         ),
@@ -347,7 +343,6 @@ class LoginWithPasswordScreen extends HookConsumerWidget {
                         style: TextStyle(
                           color: Color(0xFF212121),
                           fontSize: 16,
-                          fontFamily: 'Inter',
                           fontWeight: FontWeight.w400,
                           letterSpacing: 0.20,
                         ),
@@ -363,7 +358,6 @@ class LoginWithPasswordScreen extends HookConsumerWidget {
                           style: TextStyle(
                             color: Color(0xFF055FA7),
                             fontSize: 16,
-                            fontFamily: 'Inter',
                             fontWeight: FontWeight.w600,
                             letterSpacing: 0.20,
                           ),

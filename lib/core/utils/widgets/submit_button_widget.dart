@@ -20,7 +20,6 @@ class SubmitButton extends HookConsumerWidget {
         style: TextStyle(
           color: Colors.white,
           fontSize: 16,
-          fontFamily: 'Inter',
           fontWeight: FontWeight.w500,
         ),
       ),

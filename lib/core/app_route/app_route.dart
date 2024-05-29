@@ -11,6 +11,9 @@ import '../../screens/authentication/reset_password_screen.dart';
 import '../../screens/authentication/welcome_screen.dart';
 import '../../screens/cart/cart_screen.dart';
 import '../../screens/product/product_detail_screen.dart';
+import '../../screens/product/product_dashboard_screen.dart';
+import '../../screens/favourite_product/favourite_product_screen.dart';
+import '../../screens/notification/notification_dashboard_screen.dart';
 import 'app_route_guard.dart';
 part 'app_route.gr.dart';
 
@@ -20,6 +23,17 @@ class AppRouter extends _$AppRouter {
   AppRouter(this._tokenNotifier);
   @override
   List<AutoRoute> get routes => [
+        AutoRoute(
+            page: HomeRoute.page,
+            guards: [RouteGuard(_tokenNotifier)],
+            path: '/',
+            children: [
+              AutoRoute(page: ProductDashboardRoute.page, initial: true, path: 'product-dashboard'),
+              AutoRoute(page: NotificationProductRoute.page, path: 'notification-product'),
+              AutoRoute(page: CartRoute.page, path: 'cart'),
+              AutoRoute(page: FavouriteProductRoute.page, path: 'favourite-product'),
+              AutoRoute(page: PersonalViewRoute.page, path: 'personal-view'),
+            ]),
         AutoRoute(page: WelcomeRoute.page, path: '/welcome'),
         AutoRoute(page: RegisterRoute.page, path: '/register'),
         AutoRoute(page: LoginWithPasswordRoute.page, path: '/login-with-password'),
@@ -27,12 +41,9 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: ResetPasswordRoute.page, path: '/reset-password'),
         AutoRoute(page: ForgotPasswordRoute.page, path: '/forgot-password'),
         AutoRoute(page: LoginRoute.page, path: '/login'),
-        AutoRoute(page: PersonalViewRoute.page, guards: [RouteGuard(_tokenNotifier)], path: '/personal-view'),
-        AutoRoute(page: HomeRoute.page, guards: [RouteGuard(_tokenNotifier)], path: '/home'),
-        AutoRoute(page: CartRoute.page, guards: [RouteGuard(_tokenNotifier)], path: '/cart'),
         AutoRoute(page: ProductDetailRoute.page, guards: [RouteGuard(_tokenNotifier)], path: '/product-detail/:productId'),
 
         /// routes go here
-        RedirectRoute(path: '*', redirectTo: '/home'),
+        RedirectRoute(path: '*', redirectTo: '/'),
       ];
 }

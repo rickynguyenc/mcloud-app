@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class VNATheme {
+class MCloudTheme {
   static ThemeData get lightTheme {
     //Chế độ sáng
     return ThemeData(
@@ -9,7 +9,8 @@ class VNATheme {
         primaryColor: const Color(0xFF005D7F), // Màu chính
         // disabledColor: const Color(0x99006076),
         scaffoldBackgroundColor: Colors.white,
-        fontFamily: 'Montserrat', //3
+        fontFamily: 'Inter',
+        //3
         buttonTheme: ButtonThemeData(
           // 4
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
@@ -23,7 +24,8 @@ class VNATheme {
         //2
         primaryColor: const Color(0xFF005D7F), // Màu chính
         scaffoldBackgroundColor: Colors.black,
-        fontFamily: 'Montserrat', //3
+        fontFamily: 'Inter',
+        //3
         buttonTheme: ButtonThemeData(
           // 4
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),

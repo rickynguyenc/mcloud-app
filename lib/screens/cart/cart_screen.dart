@@ -7,6 +7,11 @@ class CartScreen extends HookConsumerWidget {
   const CartScreen();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Giỏ hàng'),
+      ),
+      body: Container(child: Text('Giỏ hàng screen')),
+    );
   }
 }

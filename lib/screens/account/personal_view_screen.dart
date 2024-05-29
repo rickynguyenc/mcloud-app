@@ -7,6 +7,11 @@ class PersonalViewScreen extends HookConsumerWidget {
   const PersonalViewScreen({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Tài khoản'),
+      ),
+      body: Container(child: Text('Tài khoản screen')),
+    );
   }
 }

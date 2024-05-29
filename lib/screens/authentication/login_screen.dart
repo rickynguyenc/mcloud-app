@@ -37,7 +37,6 @@ class LoginScreen extends HookConsumerWidget {
                 style: TextStyle(
                   color: Color(0xFF212121),
                   fontSize: 18,
-                  fontFamily: 'Inter',
                   fontWeight: FontWeight.w600,
                   height: 0,
                 ),
@@ -72,7 +71,6 @@ class LoginScreen extends HookConsumerWidget {
                       style: TextStyle(
                         color: Color(0xFF212121),
                         fontSize: 16,
-                        fontFamily: 'Inter',
                         fontWeight: FontWeight.w500,
                         letterSpacing: 0.20,
                       ),
@@ -109,7 +107,6 @@ class LoginScreen extends HookConsumerWidget {
                       style: TextStyle(
                         color: Color(0xFF212121),
                         fontSize: 16,
-                        fontFamily: 'Inter',
                         fontWeight: FontWeight.w500,
                         letterSpacing: 0.20,
                       ),
@@ -145,7 +142,6 @@ class LoginScreen extends HookConsumerWidget {
                     style: TextStyle(
                       color: Color(0xFF212121),
                       fontSize: 16,
-                      fontFamily: 'Inter',
                       fontWeight: FontWeight.w500,
                       letterSpacing: 0.20,
                     ),
@@ -174,7 +170,6 @@ class LoginScreen extends HookConsumerWidget {
                   style: TextStyle(
                     color: Color(0xFF616161),
                     fontSize: 18,
-                    fontFamily: 'Inter',
                     fontWeight: FontWeight.w500,
                     height: 0,
                   ),
@@ -218,7 +213,6 @@ class LoginScreen extends HookConsumerWidget {
                   style: TextStyle(
                     color: Color(0xFF212121),
                     fontSize: 16,
-                    fontFamily: 'Inter',
                     fontWeight: FontWeight.w400,
                     letterSpacing: 0.20,
                   ),
@@ -234,7 +228,6 @@ class LoginScreen extends HookConsumerWidget {
                     style: TextStyle(
                       color: Color(0xFF055FA7),
                       fontSize: 16,
-                      fontFamily: 'Inter',
                       fontWeight: FontWeight.w600,
                       letterSpacing: 0.20,
                     ),

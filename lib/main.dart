@@ -10,6 +10,7 @@ import 'package:mcloud/providers/quote_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'core/utils/local_storage.dart';
+import 'core/utils/theme/mcloud_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,9 +38,9 @@ class MyApp extends HookConsumerWidget {
         navigatorObservers: () => [AutoRouteObserver()],
       ),
       debugShowCheckedModeBanner: false,
-      // theme: VNATheme.lightTheme,
-      // darkTheme: ThemeData(brightness: Brightness.dark),
-      // themeMode: ThemeMode.light,
+      theme: MCloudTheme.lightTheme,
+      darkTheme: ThemeData(brightness: Brightness.dark),
+      themeMode: ThemeMode.light,
     );
   }
 }

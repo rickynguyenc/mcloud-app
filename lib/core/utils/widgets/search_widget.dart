@@ -65,7 +65,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
             ),
             suffixIcon: IconButton(
               icon: SvgPicture.asset(
-                'assets/icons/horizontal container.svg',
+                'assets/icons/horizontal-container.svg',
                 width: 24,
                 height: 24,
               ),
