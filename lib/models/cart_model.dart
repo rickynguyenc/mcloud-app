@@ -1,6 +1,6 @@
 // Tất cả sản phẩm trong cart
 class AllProductionInCartResponse {
-  int? code;
+  num? code;
   List<ProductInCart>? result;
 
   AllProductionInCartResponse({this.code, this.result});
@@ -26,12 +26,12 @@ class AllProductionInCartResponse {
 }
 
 class ProductInCart {
-  int? id;
+  num? id;
   String? name;
   String? state;
   PartnerIdCart? partnerId;
   List<OrderLine>? orderLine;
-  int? amountTotal;
+  num? amountTotal;
 
   ProductInCart({this.id, this.name, this.state, this.partnerId, this.orderLine, this.amountTotal});
 
@@ -66,7 +66,7 @@ class ProductInCart {
 }
 
 class PartnerIdCart {
-  int? id;
+  num? id;
   String? name;
 
   PartnerIdCart({this.id, this.name});
@@ -85,11 +85,11 @@ class PartnerIdCart {
 }
 
 class OrderLine {
-  int? id;
+  num? id;
   ProductIdCart? productId;
-  int? productUomQty;
-  int? priceUnit;
-  int? priceSubtotal;
+  num? productUomQty;
+  num? priceUnit;
+  num? priceSubtotal;
 
   OrderLine({this.id, this.productId, this.productUomQty, this.priceUnit, this.priceSubtotal});
 
@@ -115,7 +115,7 @@ class OrderLine {
 }
 
 class ProductIdCart {
-  int? id;
+  num? id;
   String? name;
   String? avatarUrl;
   List<ProductTemplateAttributeValueIds>? productTemplateAttributeValueIds;
@@ -147,7 +147,7 @@ class ProductIdCart {
 }
 
 class ProductTemplateAttributeValueIds {
-  int? id;
+  num? id;
   String? name;
   PartnerIdCart? attributeId;
   PartnerIdCart? productAttributeValueId;
@@ -200,10 +200,10 @@ class CartInputDto {
 }
 
 class OrderLineDto {
-  int? productTemplateId;
+  num? productTemplateId;
   List<ProductTemplateAttributeValueIdsDto>? productTemplateAttributeValueIds;
-  int? productUomQty;
-  int? priceUnit;
+  num? productUomQty;
+  num? priceUnit;
 
   OrderLineDto({this.productTemplateId, this.productTemplateAttributeValueIds, this.productUomQty, this.priceUnit});
 
@@ -232,8 +232,8 @@ class OrderLineDto {
 }
 
 class ProductTemplateAttributeValueIdsDto {
-  int? attributeId;
-  int? productAttributeValueId;
+  num? attributeId;
+  num? productAttributeValueId;
 
   ProductTemplateAttributeValueIdsDto({this.attributeId, this.productAttributeValueId});
 

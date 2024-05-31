@@ -21,16 +21,16 @@ class AppDio with DioMixin implements Dio {
       sendTimeout: const Duration(milliseconds: _defaultConnectTimeout),
       // receiveTimeout: _defaultConnectTimeout,
     );
-    if (UserPreferences.instance.getToken() != '') {
-      options.headers = {'Authorization': 'Bearer ${UserPreferences.instance.getToken()}'};
-    }
+    // if (UserPreferences.instance.getToken() != '') {
+    //   options.headers = {'Authorization': 'Bearer ${UserPreferences.instance.getToken()}'};
+    // }
     this.options = options;
     interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          // if (UserPreferences.instance.getToken() != '') {
-          //   options.headers.addAll({'Authorization': 'Bearer ${UserPreferences.instance.getToken()}'});
-          // }
+          if (UserPreferences.instance.getToken() != '') {
+            options.headers.addAll({'Authorization': 'Bearer ${UserPreferences.instance.getToken()}'});
+          }
 
           handler.next(options);
         },

@@ -5,13 +5,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mcloud/core/app_route/app_route.dart';
 import 'package:mcloud/core/utils/env.dart';
+import 'package:mcloud/models/order_model.dart';
 import 'package:mcloud/providers/cart_provider.dart';
+import 'package:mcloud/providers/order_provider.dart';
 
 import '../../core/utils/widgets/shimmer_loading/common_simmer.dart';
 
 @RoutePage()
-class CartScreen extends HookConsumerWidget {
-  const CartScreen();
+class CheckCartPaymentScreen extends HookConsumerWidget {
+  const CheckCartPaymentScreen();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollCtrlMain = useScrollController();
@@ -49,7 +51,7 @@ class CartScreen extends HookConsumerWidget {
                             child: Container(
                               alignment: Alignment.center,
                               child: Text(
-                                'Giỏ hàng của tôi',
+                                'Kiểm tra đơn hàng',
                                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                               ),
                             ),
@@ -149,6 +151,78 @@ class CartScreen extends HookConsumerWidget {
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
                       ),
+                      SizedBox(height: 16),
+                      Row(
+                        children: [
+                          Text(
+                            'Phương thức thanh toán',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                          ),
+                          SizedBox(width: 16),
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0x0F000000),
+                                    blurRadius: 16,
+                                    offset: Offset(0, 4),
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.payment_outlined, color: Color(0xffFF6C44)),
+                                  SizedBox(width: 16),
+                                  Text(
+                                    'Thanh toán qua OnePay',
+                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 16),
+                      Row(
+                        children: [
+                          Text(
+                            'Mã giảm giá',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                          ),
+                          SizedBox(width: 16),
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0x0F000000),
+                                    blurRadius: 16,
+                                    offset: Offset(0, 4),
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.card_giftcard_outlined, color: Color(0xffFF6C44)),
+                                  SizedBox(width: 16),
+                                  Text(
+                                    'Nhập mã giảm giá',
+                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -191,8 +265,17 @@ class CartScreen extends HookConsumerWidget {
                   ),
                   SizedBox(width: 16),
                   ElevatedButton(
-                    onPressed: () {
-                      context.router.push(CheckCartPaymentRoute());
+                    onPressed: () async {
+                      final orderInput = AddOrderDto(againLink: 'http://google.com', orderLine: [
+                        OrderLineDto(
+                          productTemplateId: 14,
+                          productTemplateAttributeValueIds: [],
+                          productUomQty: 1,
+                          priceUnit: 100000,
+                        )
+                      ]);
+                      final result = await ref.read(orderProvider.notifier).addToOrder(orderInput);
+                      // context.router.push(PaymentViewRoute(linkOnePay: result?.urlPayment ?? ''));
                     },
                     child: Text('Thanh toán'),
                     style: ElevatedButton.styleFrom(

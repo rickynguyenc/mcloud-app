@@ -1,5 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:mcloud/providers/authentication_provider.dart';
+import 'package:mcloud/screens/cart/check_cart_payment_screen.dart';
+import 'package:mcloud/screens/cart/payment_view_screen.dart';
 import 'package:mcloud/screens/home_screen.dart';
 import '../../screens/account/personal_view_screen.dart';
 import '../../screens/authentication/forget_password_screen.dart';
@@ -42,6 +45,8 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: ForgotPasswordRoute.page, path: '/forgot-password'),
         AutoRoute(page: LoginRoute.page, path: '/login'),
         AutoRoute(page: ProductDetailRoute.page, guards: [RouteGuard(_tokenNotifier)], path: '/product-detail/:productId'),
+        AutoRoute(page: PaymentViewRoute.page, guards: [RouteGuard(_tokenNotifier)], path: '/payment-view/:linkOnePay'),
+        AutoRoute(page: CheckCartPaymentRoute.page, guards: [RouteGuard(_tokenNotifier)], path: '/check-cart-payment'),
 
         /// routes go here
         RedirectRoute(path: '*', redirectTo: '/'),
