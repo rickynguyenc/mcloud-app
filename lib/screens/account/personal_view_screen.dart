@@ -8,10 +8,36 @@ class PersonalViewScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Tài khoản'),
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Color(0xffF5F5F5),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 48),
+            Container(
+              height: 56,
+              alignment: Alignment.center,
+              child: Text(
+                'Quản lý tài khoản',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Color(0xFF212121),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            SizedBox(height: 16),
+            Expanded(
+              child: Center(
+                child: Text('Quản ly tài khoản screen'),
+              ),
+            ),
+          ],
+        ),
       ),
-      body: Container(child: Text('Tài khoản screen')),
     );
   }
 }

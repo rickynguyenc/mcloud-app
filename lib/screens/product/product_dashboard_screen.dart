@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mcloud/core/app_route/app_route.dart';
 import 'package:mcloud/core/utils/env.dart';
 import 'package:mcloud/core/utils/widgets/search_widget.dart';
@@ -132,11 +133,42 @@ class ProductDashboardScreen extends HookConsumerWidget {
                     ],
                   ),
                   SizedBox(height: 24),
-                  SearchBarWidget(
-                    textSearch: '',
-                    hintText: 'Search...',
-                    onChanged: (value) {},
-                    onSubmit: (value) {},
+                  // Search button
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFF4F6F9), elevation: 0, shadowColor: Colors.transparent, fixedSize: Size(double.infinity, 52)),
+                    onPressed: () {
+                      context.router.push(SearchProductRoute());
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/icons/search-normal.svg',
+                          width: 24,
+                          height: 24,
+                        ),
+                        SizedBox(width: 12),
+                        Expanded(
+                          child: SizedBox(
+                            child: Text(
+                              'Search...',
+                              style: TextStyle(
+                                color: Color(0xFF94A3B8),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SvgPicture.asset(
+                          'assets/icons/horizontal-container.svg',
+                          width: 24,
+                          height: 24,
+                        )
+                      ],
+                    ),
                   ),
                   SizedBox(height: 24),
                   Expanded(
@@ -155,7 +187,6 @@ class ProductDashboardScreen extends HookConsumerWidget {
                                 BannerImage(image: 'assets/images/banner_home.png'),
                               ],
                             ),
-
                             Row(
                               children: [
                                 Expanded(
@@ -428,12 +459,11 @@ class CategoryItemWidget extends HookConsumerWidget {
         ),
         SizedBox(height: 8),
         Text(
-          'Phần Mềm ',
+          title,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: Color(0xFF9CA3AF),
             fontSize: 14,
-            fontFamily: 'SF Pro Display',
             fontWeight: FontWeight.w500,
           ),
         ),

@@ -30,12 +30,9 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     return Container(
       // height: 48,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Color(0xFFF4F6F9),
-      ),
-      margin: const EdgeInsets.only(
-        top: 16,
-      ),
+          borderRadius: BorderRadius.circular(8),
+          // color: Color(0xFFF4F6F9),
+          color: Colors.white),
       padding: const EdgeInsets.symmetric(
         horizontal: 12,
       ),

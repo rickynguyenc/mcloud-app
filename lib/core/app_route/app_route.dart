@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:mcloud/generated/l10n.dart';
 import 'package:mcloud/providers/authentication_provider.dart';
 import 'package:mcloud/screens/cart/check_cart_payment_screen.dart';
 import 'package:mcloud/screens/cart/payment_view_screen.dart';
@@ -15,6 +16,7 @@ import '../../screens/authentication/welcome_screen.dart';
 import '../../screens/cart/cart_screen.dart';
 import '../../screens/product/product_detail_screen.dart';
 import '../../screens/product/product_dashboard_screen.dart';
+import '../../screens/product/search_product_screen.dart';
 import '../../screens/favourite_product/favourite_product_screen.dart';
 import '../../screens/notification/notification_dashboard_screen.dart';
 import 'app_route_guard.dart';
@@ -47,6 +49,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: ProductDetailRoute.page, guards: [RouteGuard(_tokenNotifier)], path: '/product-detail/:productId'),
         AutoRoute(page: PaymentViewRoute.page, guards: [RouteGuard(_tokenNotifier)], path: '/payment-view/:linkOnePay'),
         AutoRoute(page: CheckCartPaymentRoute.page, guards: [RouteGuard(_tokenNotifier)], path: '/check-cart-payment'),
+        AutoRoute(page: SearchProductRoute.page, guards: [RouteGuard(_tokenNotifier)], path: '/search-product'),
 
         /// routes go here
         RedirectRoute(path: '*', redirectTo: '/'),

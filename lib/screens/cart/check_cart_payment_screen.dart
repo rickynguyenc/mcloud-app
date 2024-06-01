@@ -271,11 +271,11 @@ class CheckCartPaymentScreen extends HookConsumerWidget {
                           productTemplateId: 14,
                           productTemplateAttributeValueIds: [],
                           productUomQty: 1,
-                          priceUnit: 100000,
+                          priceUnit: 5000,
                         )
                       ]);
                       final result = await ref.read(orderProvider.notifier).addToOrder(orderInput);
-                      // context.router.push(PaymentViewRoute(linkOnePay: result?.urlPayment ?? ''));
+                      context.router.push(PaymentViewRoute(linkOnePay: result?.urlPayment ?? ''));
                     },
                     child: Text('Thanh toán'),
                     style: ElevatedButton.styleFrom(

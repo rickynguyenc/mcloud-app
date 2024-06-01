@@ -193,7 +193,7 @@ class LoginWithPasswordScreen extends HookConsumerWidget {
                         if (_passwordFormKey.currentState!.validate() && _userNameFormKey.currentState!.validate()) {
                           ref.read(authProvider).login().then((value) {
                             if (value) {
-                              context.router.push(HomeRoute());
+                              context.router.replaceAll([HomeRoute()], updateExistingRoutes: true);
                             }
                           });
                         }

@@ -48,13 +48,7 @@ class _PaymentViewScreenState extends State<PaymentViewScreen> {
             debugPrint('Page finished loading: $url');
           },
           onWebResourceError: (WebResourceError error) {
-            debugPrint('''
-Page resource error:
-  code: ${error.errorCode}
-  description: ${error.description}
-  errorType: ${error.errorType}
-  isForMainFrame: ${error.isForMainFrame}
-          ''');
+            Navigator.pop(context);
           },
           onNavigationRequest: (NavigationRequest request) {
             if (request.url.startsWith('https://www.youtube.com/')) {
@@ -92,9 +86,11 @@ Page resource error:
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      child: Scaffold(
-        backgroundColor: Colors.grey[200],
-        body: WebViewWidget(controller: _controller),
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.grey[200],
+          body: WebViewWidget(controller: _controller),
+        ),
       ),
       onWillPop: () async {
         if (await _controller.canGoBack()) {
