@@ -15,6 +15,7 @@ class SharedPrefConstant {
   static const String datelogin = 'datelogin';
   static const String rememberLogin = 'rememberLogin';
   static const String badge = 'badge';
+  static const String lanLogin = 'lanLogin';
 }
 
 class UserPreferences {
@@ -43,6 +44,14 @@ class UserPreferences {
 
   String getToken() {
     return _sharedPreferences.getString(SharedPrefConstant.token) ?? '';
+  }
+
+  Future<bool> saveLanLogin(int token) {
+    return _sharedPreferences.setInt(SharedPrefConstant.lanLogin, token);
+  }
+
+  int getLanLogin() {
+    return _sharedPreferences.getInt(SharedPrefConstant.lanLogin) ?? 0;
   }
 
   Future<bool> saveRefreshToken(String token) {

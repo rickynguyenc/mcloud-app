@@ -35,7 +35,7 @@ class CartScreen extends HookConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 48),
+                      SizedBox(height: 24),
                       Row(
                         children: [
                           IconButton(

@@ -57,6 +57,9 @@ dependencies:
   shimmer: ^3.0.0
   flutter_html: 3.0.0-beta.2
   webview_flutter: ^4.4.2
+  #flash screen
+  flutter_native_splash: 2.2.16
+  smooth_page_indicator: 1.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -112,3 +115,29 @@ flutter_intl:
   arb_dir: lib/l10n # Optional. Sets the directory of your ARB resource files. Provided value should be a valid path on your system. Default: lib/l10n
   output_dir: lib/generated # Optional. Sets the directory of generated localization files. Provided value should be a valid path on your system. Default: lib/generated
   use_deferred_loading: false # Optional. Must be set to true to generate localization code that is loaded with deferred loading. Default: false
+flutter_native_splash:
+  color: "#ffffff"
+  background_image: assets/images/splash.png
+  android_12:
+    background_image: assets/images/splash.png
+    # Splash screen background color.
+    color: "#ffffff"
+  android: true
+  ios: true
+# flutter_launcher_icons:
+#   android: "launcher_icon"
+#   ios: true
+#   image_path: "assets/icon/icon.png"
+#   min_sdk_android: 21 # android min sdk min:16, default 21
+#   web:
+#     generate: true
+#     image_path: "path/to/image.png"
+#     background_color: "#hexcode"
+#     theme_color: "#hexcode"
+#   windows:
+#     generate: true
+#     image_path: "path/to/image.png"
+#     icon_size: 48 # min:48, max:256, default: 48
+#   macos:
+#     generate: true
+#     image_path: "path/to/image.png"

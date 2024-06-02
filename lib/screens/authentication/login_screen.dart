@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mcloud/core/app_route/app_route.dart';
+import 'package:mcloud/core/utils/local_storage.dart';
 
 import '../../core/utils/widgets/submit_button_widget.dart';
 import '../../providers/authentication_provider.dart';
@@ -11,6 +12,10 @@ import '../../providers/authentication_provider.dart';
 class LoginScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    useEffect(() {
+      UserPreferences.instance.saveLanLogin(1);
+      return null;
+    }, const []);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
