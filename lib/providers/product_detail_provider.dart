@@ -12,12 +12,13 @@ class ProductDetailProvider extends StateNotifier<ProductDetail> {
   final Ref ref;
   ProductDetailProvider(this.ref) : super(ProductDetail());
   late final _productDetailService = ref.read(productServiceProvider);
-  Future<void> getDetailProduct(int id) async {
+  Future<ProductDetailResponse?> getDetailProduct(int id) async {
     try {
       final result = await _productDetailService.getProduct(id);
       state = result.result?[0] ?? ProductDetail();
+      return result;
     } catch (e) {
-      print(e);
+      return null;
     }
   }
 }

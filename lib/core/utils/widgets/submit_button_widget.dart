@@ -4,12 +4,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class SubmitButton extends HookConsumerWidget {
   final Function() onPressed;
   final String text;
-  const SubmitButton(this.text, {Key? key, required this.onPressed}) : super(key: key);
+  final Color? color;
+  const SubmitButton(this.text, {Key? key, required this.onPressed, this.color}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color(0xFF055FA7),
+        backgroundColor: color ?? Color(0xFF055FA7),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(56),
         ),

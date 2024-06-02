@@ -177,15 +177,15 @@ class ProductTemplateAttributeValueIds {
 
 // Add cart dto
 class CartInputDto {
-  List<OrderLine>? orderLine;
+  List<OrderLineDto>? orderLine;
 
   CartInputDto({this.orderLine});
 
   CartInputDto.fromJson(Map<String, dynamic> json) {
     if (json['order_line'] != null) {
-      orderLine = <OrderLine>[];
+      orderLine = <OrderLineDto>[];
       json['order_line'].forEach((v) {
-        orderLine!.add(new OrderLine.fromJson(v));
+        orderLine!.add(new OrderLineDto.fromJson(v));
       });
     }
   }
