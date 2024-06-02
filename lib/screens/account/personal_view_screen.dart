@@ -38,7 +38,7 @@ class PersonalViewScreen extends HookConsumerWidget {
                   child: TextButton(
                 onPressed: () {
                   ref.read(authProvider).logout();
-                  AutoRouter.of(context).pushAndPopUntil(const LoginRoute(), predicate: (_) => true);
+                  context.router.replaceAll([LoginRoute()], updateExistingRoutes: true);
                 },
                 child: Text(
                   'Đăng xuất',

@@ -59,7 +59,6 @@ dependencies:
   webview_flutter: ^4.4.2
   #flash screen
   flutter_native_splash: 2.2.16
-  smooth_page_indicator: 1.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
