@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:mcloud/generated/l10n.dart';
+import 'package:mcloud/models/cart_model.dart';
 import 'package:mcloud/providers/authentication_provider.dart';
 import 'package:mcloud/screens/cart/check_cart_payment_screen.dart';
 import 'package:mcloud/screens/cart/payment_view_screen.dart';

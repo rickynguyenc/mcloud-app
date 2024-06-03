@@ -90,8 +90,9 @@ class OrderLine {
   num? productUomQty;
   num? priceUnit;
   num? priceSubtotal;
+  bool? isChoose;
 
-  OrderLine({this.id, this.productId, this.productUomQty, this.priceUnit, this.priceSubtotal});
+  OrderLine({this.id, this.productId, this.productUomQty, this.priceUnit, this.priceSubtotal, this.isChoose});
 
   OrderLine.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -99,6 +100,7 @@ class OrderLine {
     productUomQty = json['product_uom_qty'];
     priceUnit = json['price_unit'];
     priceSubtotal = json['price_subtotal'];
+    isChoose = false;
   }
 
   Map<String, dynamic> toJson() {

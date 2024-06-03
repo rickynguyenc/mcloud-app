@@ -28,7 +28,7 @@ class LoginWithPasswordScreen extends HookConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 32),
+            SizedBox(height: 48),
             Row(
               children: [
                 Container(
@@ -172,13 +172,18 @@ class LoginWithPasswordScreen extends HookConsumerWidget {
                         ),
                       ),
                       Spacer(),
-                      Text(
-                        'Quên mật khẩu',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          color: Color(0xFF055FA7),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
+                      TextButton(
+                        onPressed: () {
+                          context.router.push(ForgotPasswordRoute());
+                        },
+                        child: Text(
+                          'Quên mật khẩu',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            color: Color(0xFF055FA7),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
                     ],

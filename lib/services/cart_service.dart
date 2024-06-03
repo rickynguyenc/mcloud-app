@@ -18,4 +18,7 @@ abstract class CartService {
 
   @GET('/api/shop/cart')
   Future<AllProductionInCartResponse> getCart(); // replace with your actual response type
+
+  @PUT('/api/shop/update_cart')
+  Future<dynamic> updateCart(@Body() Map<String, dynamic> body);
 }

@@ -41,7 +41,7 @@ class OrderItem {
   String? name;
   String? state;
   PartnerId? partnerId;
-  List<OrderLine>? orderLine;
+  List<OrderLineOrder>? orderLine;
   num? amountTotal;
 
   OrderItem({this.id, this.name, this.state, this.partnerId, this.orderLine, this.amountTotal});
@@ -52,9 +52,9 @@ class OrderItem {
     state = json['state'];
     partnerId = json['partner_id'] != null ? new PartnerId.fromJson(json['partner_id']) : null;
     if (json['order_line'] != null) {
-      orderLine = <OrderLine>[];
+      orderLine = <OrderLineOrder>[];
       json['order_line'].forEach((v) {
-        orderLine!.add(new OrderLine.fromJson(v));
+        orderLine!.add(new OrderLineOrder.fromJson(v));
       });
     }
     amountTotal = json['amount_total'];
@@ -95,16 +95,16 @@ class PartnerId {
   }
 }
 
-class OrderLine {
+class OrderLineOrder {
   num? id;
   PartnerId? productId;
   num? productUomQty;
   num? priceUnit;
   num? priceSubtotal;
 
-  OrderLine({this.id, this.productId, this.productUomQty, this.priceUnit, this.priceSubtotal});
+  OrderLineOrder({this.id, this.productId, this.productUomQty, this.priceUnit, this.priceSubtotal});
 
-  OrderLine.fromJson(Map<String, dynamic> json) {
+  OrderLineOrder.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     productId = json['product_id'] != null ? new PartnerId.fromJson(json['product_id']) : null;
     productUomQty = json['product_uom_qty'];
@@ -189,7 +189,7 @@ class Order {
   String? state;
   String? status;
   PartnerId? partnerId;
-  List<OrderLine>? orderLine;
+  List<OrderLineOrder>? orderLine;
   num? amountTotal;
 
   Order({this.id, this.name, this.state, this.status, this.partnerId, this.orderLine, this.amountTotal});
@@ -201,9 +201,9 @@ class Order {
     status = json['status'];
     partnerId = json['partner_id'] != null ? new PartnerId.fromJson(json['partner_id']) : null;
     if (json['order_line'] != null) {
-      orderLine = <OrderLine>[];
+      orderLine = <OrderLineOrder>[];
       json['order_line'].forEach((v) {
-        orderLine!.add(new OrderLine.fromJson(v));
+        orderLine!.add(new OrderLineOrder.fromJson(v));
       });
     }
     amountTotal = json['amount_total'];
@@ -378,7 +378,7 @@ class SaleOrder {
   String? name;
   String? state;
   PartnerId? partnerId;
-  List<OrderLine>? orderLine;
+  List<OrderLineOrder>? orderLine;
   num? amountTotal;
 
   SaleOrder({this.id, this.name, this.state, this.partnerId, this.orderLine, this.amountTotal});
@@ -389,9 +389,9 @@ class SaleOrder {
     state = json['state'];
     partnerId = json['partner_id'] != null ? new PartnerId.fromJson(json['partner_id']) : null;
     if (json['order_line'] != null) {
-      orderLine = <OrderLine>[];
+      orderLine = <OrderLineOrder>[];
       json['order_line'].forEach((v) {
-        orderLine!.add(new OrderLine.fromJson(v));
+        orderLine!.add(new OrderLineOrder.fromJson(v));
       });
     }
     amountTotal = json['amount_total'];

@@ -27,7 +27,7 @@ class RegisterScreen extends HookConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 32),
+            SizedBox(height: 48),
             Row(
               children: [
                 Container(

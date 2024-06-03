@@ -27,6 +27,16 @@ class CartNotifier extends StateNotifier<List<ProductInCart>> {
       return false;
     }
   }
+
+  Future<bool> updateCart(num productId, num productUomQty) async {
+    try {
+      await _cartService.updateCart({'product_id': productId.round(), 'product_uom_qty': productUomQty.round()});
+      await getCart();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }
 
 // Define the CartProvider

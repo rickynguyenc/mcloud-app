@@ -149,7 +149,7 @@ class NotificationProductScreen extends HookConsumerWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 36),
+              SizedBox(height: 12),
               Expanded(
                 child: ListView(
                   shrinkWrap: true,
@@ -178,7 +178,7 @@ class NotificationElementWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      margin: EdgeInsets.only(top: 16),
+      margin: EdgeInsets.only(bottom: 16),
       padding: EdgeInsets.all(12),
       decoration: ShapeDecoration(
         color: Color(0xFFF5F5F5),
