@@ -40,6 +40,7 @@ class AppDio with DioMixin implements Dio {
             // showToast(ctx: AppGlobal.instance.context, mess: "Current user did not login to the application", color: Colors.red);
             // AppGlobal.instance.context.router.pushAndPopUntil(LoginRoute(), predicate: (_) => true);
             // await authNotifier.signOut();
+            handler.next(error);
           } else {
             handler.next(error);
           }

@@ -48,7 +48,7 @@ class LoginResponse {
 
 class UserContext {
   String? lang;
-  String? tz;
+  dynamic tz;
   int? uid;
 
   UserContext({this.lang, this.tz, this.uid});

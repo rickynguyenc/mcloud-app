@@ -6,12 +6,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:mcloud/core/app_route/app_route.dart';
 import 'package:mcloud/core/utils/env.dart';
+import 'package:mcloud/core/utils/widgets/loading_mark.dart';
 import 'package:mcloud/models/cart_model.dart' as cart;
 import 'package:mcloud/models/order_model.dart';
 import 'package:mcloud/providers/cart_provider.dart';
 import 'package:mcloud/providers/order_provider.dart';
-
-import '../../core/utils/widgets/shimmer_loading/common_simmer.dart';
 
 @RoutePage()
 class CheckCartPaymentScreen extends HookConsumerWidget {
@@ -22,13 +21,15 @@ class CheckCartPaymentScreen extends HookConsumerWidget {
     final scrollCtrlMain = useScrollController();
     final cartNotifier = ref.read(cartProvider.notifier);
     final totalValue = useState(0);
+    final isLoading = useState(false);
     useEffect(() {
       lstOrderLineChoosed.forEach((element) {
         totalValue.value += element.priceUnit?.round() ?? 0;
       });
       return null;
     }, []);
-    return Scaffold(
+    return Stack(children: [
+      Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         body: Padding(
@@ -148,6 +149,7 @@ class CheckCartPaymentScreen extends HookConsumerWidget {
                 ),
                 child: ElevatedButton(
                   onPressed: () async {
+                    isLoading.value = true;
                     final orderInput = AddOrderDto(againLink: 'http://google.com', orderLine: [
                       OrderLineDto(
                         productTemplateId: 14,
@@ -157,6 +159,7 @@ class CheckCartPaymentScreen extends HookConsumerWidget {
                       )
                     ]);
                     final result = await ref.read(orderProvider.notifier).addToOrder(orderInput);
+                    isLoading.value = false;
                     context.router.push(PaymentViewRoute(linkOnePay: result?.urlPayment ?? ''));
                   },
                   child: Text('Thanh toán'),
@@ -172,7 +175,10 @@ class CheckCartPaymentScreen extends HookConsumerWidget {
               ),
             ],
           ),
-        ));
+        ),
+      ),
+      isLoading.value ? Loading() : const SizedBox.shrink(),
+    ]);
   }
 }
 

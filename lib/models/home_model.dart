@@ -159,9 +159,9 @@ class ValueIds {
 // Danh mục sản phẩm
 class CategoryProductResponse {
   num? count;
-  Null? prev;
+  dynamic prev;
   num? current;
-  Null? next;
+  dynamic next;
   num? totalPages;
   List<Category>? result;
 

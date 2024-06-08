@@ -6,7 +6,6 @@ import 'package:mcloud/core/app_route/app_route.dart';
 import 'package:mcloud/core/utils/local_storage.dart';
 
 import '../../core/utils/widgets/submit_button_widget.dart';
-import '../../providers/authentication_provider.dart';
 
 @RoutePage()
 class LoginScreen extends HookConsumerWidget {

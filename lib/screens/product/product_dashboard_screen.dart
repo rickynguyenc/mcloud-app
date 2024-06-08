@@ -1,26 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
 import 'package:mcloud/core/app_route/app_route.dart';
-import 'package:mcloud/core/utils/env.dart';
 import 'package:mcloud/core/utils/widgets/product_item_in_grid_widget.dart';
-import 'package:mcloud/core/utils/widgets/search_widget.dart';
 import 'package:mcloud/core/utils/widgets/shimmer_loading/common_simmer.dart';
 import 'package:mcloud/core/utils/widgets/sliderbar_widget.dart';
-import 'package:mcloud/models/quote_model.dart';
 import 'package:mcloud/providers/home_provider.dart';
-import 'package:mcloud/providers/quote_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
 class ProductDashboardScreen extends HookConsumerWidget {
   final _scrollCtrl = ScrollController();
-  void _refresh(WidgetRef ref) {
-    ref.read(homeProvider.notifier).getListProducts();
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
