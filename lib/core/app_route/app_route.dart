@@ -4,6 +4,8 @@ import 'package:mcloud/generated/l10n.dart';
 import 'package:mcloud/models/cart_model.dart';
 import 'package:mcloud/providers/authentication_provider.dart';
 import 'package:mcloud/screens/account/buy_history_screen.dart';
+import 'package:mcloud/screens/account/detail_by_order_screen.dart';
+import 'package:mcloud/screens/authentication/change_password_screen.dart';
 import 'package:mcloud/screens/cart/check_cart_payment_screen.dart';
 import 'package:mcloud/screens/cart/payment_view_screen.dart';
 import 'package:mcloud/screens/home_screen.dart';
@@ -53,6 +55,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: CheckCartPaymentRoute.page, guards: [RouteGuard(_tokenNotifier)], path: '/check-cart-payment'),
         AutoRoute(page: SearchProductRoute.page, guards: [RouteGuard(_tokenNotifier)], path: '/search-product'),
         AutoRoute(page: BuyHistoryRoute.page, guards: [RouteGuard(_tokenNotifier)], path: '/buy-history'),
+        AutoRoute(page: DetailOrderRoute.page, guards: [RouteGuard(_tokenNotifier)], path: '/detail-order'),
 
         /// routes go here
         RedirectRoute(path: '*', redirectTo: '/'),

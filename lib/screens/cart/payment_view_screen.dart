@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:mcloud/core/app_route/app_route.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
@@ -59,6 +60,17 @@ class _PaymentViewScreenState extends State<PaymentViewScreen> {
             return NavigationDecision.navigate;
           },
           onUrlChange: (UrlChange change) {
+            if ((change.url ?? '').contains('vpc_Message=Approved')) {
+              //TODO: Update status order to success
+            }
+            if ((change.url ?? '').contains('http://api-shop-mobifone.tabcom.vn/payment/checkout')) {
+              Uri uri = Uri.parse(change.url!);
+              String? orderInfo = uri.queryParameters['vpc_OrderInfo'];
+              final idOrder = orderInfo?.substring(3);
+              if (idOrder != null) {
+                AutoRouter.of(context).replace(DetailOrderRoute(orderId: int.parse(idOrder ?? '')));
+              }
+            }
             debugPrint('url change to ${change.url}');
           },
         ),

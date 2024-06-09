@@ -215,6 +215,8 @@ class SearchProductScreen extends HookConsumerWidget {
                                                       children: [
                                                         Text(
                                                           lstProduct[index].name ?? '',
+                                                          maxLines: 3,
+                                                          overflow: TextOverflow.ellipsis,
                                                           style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize: 10.09,

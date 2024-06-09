@@ -38,8 +38,8 @@ class AllOrderResponse {
 
 class OrderItem {
   num? id;
-  String? name;
-  String? state;
+  dynamic name;
+  dynamic state;
   PartnerId? partnerId;
   List<OrderLineOrder>? orderLine;
   num? amountTotal;
@@ -81,7 +81,7 @@ class OrderItem {
 
 class PartnerId {
   num? id;
-  String? name;
+  dynamic name;
 
   PartnerId({this.id, this.name});
 
@@ -104,8 +104,9 @@ class OrderLineOrder {
   num? productUomQty;
   num? priceUnit;
   num? priceSubtotal;
+  dynamic productKey;
 
-  OrderLineOrder({this.id, this.productId, this.productUomQty, this.priceUnit, this.priceSubtotal});
+  OrderLineOrder({this.id, this.productId, this.productUomQty, this.priceUnit, this.priceSubtotal, this.productKey});
 
   OrderLineOrder.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -113,6 +114,7 @@ class OrderLineOrder {
     productUomQty = json['product_uom_qty'];
     priceUnit = json['price_unit'];
     priceSubtotal = json['price_subtotal'];
+    productKey = json['product_key'];
   }
 
   Map<String, dynamic> toJson() {
@@ -124,6 +126,7 @@ class OrderLineOrder {
     data['product_uom_qty'] = this.productUomQty;
     data['price_unit'] = this.priceUnit;
     data['price_subtotal'] = this.priceSubtotal;
+    data['product_key'] = this.productKey;
     return data;
   }
 }
@@ -168,9 +171,14 @@ class DetailOrder {
     }
     if (json['transaction'] != null) {
       transaction = <Transaction>[];
-      json['transaction'].forEach((v) {
-        transaction!.add(new Transaction.fromJson(v));
-      });
+      final result = json['transaction'];
+      if (result is Map && json['transaction']?['state'] == 'unpaid') {
+        transaction!.add(new Transaction.fromJson(json['transaction']));
+      } else {
+        json['transaction'].forEach((v) {
+          transaction!.add(new Transaction.fromJson(v));
+        });
+      }
     }
   }
 
@@ -188,9 +196,9 @@ class DetailOrder {
 
 class Order {
   num? id;
-  String? name;
-  String? state;
-  String? status;
+  dynamic name;
+  dynamic state;
+  dynamic status;
   PartnerId? partnerId;
   List<OrderLineOrder>? orderLine;
   num? amountTotal;
@@ -231,19 +239,19 @@ class Order {
 
 class Transaction {
   num? id;
-  String? state;
-  String? vpcOrderInfo;
-  String? vpcAmount;
-  String? vpcMessage;
+  dynamic state;
+  dynamic vpcOrderInfo;
+  dynamic vpcAmount;
+  dynamic vpcMessage;
 
   Transaction({this.id, this.state, this.vpcOrderInfo, this.vpcAmount, this.vpcMessage});
 
   Transaction.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    state = json['state'];
-    vpcOrderInfo = json['vpc_OrderInfo'];
-    vpcAmount = json['vpc_Amount'];
-    vpcMessage = json['vpc_Message'];
+    id = json['id'] ?? 0;
+    state = json['state'] ?? '';
+    vpcOrderInfo = json['vpc_OrderInfo'] ?? '';
+    vpcAmount = json['vpc_Amount'] ?? '';
+    vpcMessage = json['vpc_Message'] ?? '';
   }
 
   Map<String, dynamic> toJson() {
@@ -259,7 +267,7 @@ class Transaction {
 
 // Add Order DTO
 class AddOrderDto {
-  String? againLink;
+  dynamic againLink;
   List<OrderLineDto>? orderLine;
 
   AddOrderDto({this.againLink, this.orderLine});
@@ -295,7 +303,7 @@ class OrderLineDto {
   OrderLineDto.fromJson(Map<String, dynamic> json) {
     productTemplateId = json['product_template_id'];
     if (json['product_template_attribute_value_ids'] != null) {
-      productTemplateAttributeValueIds = <Null>[];
+      productTemplateAttributeValueIds = <dynamic>[];
       json['product_template_attribute_value_ids'].forEach((v) {
         productTemplateAttributeValueIds!.add(v);
       });
@@ -318,7 +326,7 @@ class OrderLineDto {
 
 // Add order response
 class AddOrderResponse {
-  String? jsonrpc;
+  dynamic jsonrpc;
   dynamic id;
   ResultAddOrder? result;
 
@@ -344,9 +352,9 @@ class AddOrderResponse {
 class ResultAddOrder {
   num? code;
   num? status;
-  String? message;
+  dynamic message;
   List<SaleOrder>? saleOrder;
-  String? urlPayment;
+  dynamic urlPayment;
 
   ResultAddOrder({this.code, this.status, this.message, this.saleOrder, this.urlPayment});
 
@@ -378,8 +386,8 @@ class ResultAddOrder {
 
 class SaleOrder {
   num? id;
-  String? name;
-  String? state;
+  dynamic name;
+  dynamic state;
   PartnerId? partnerId;
   List<OrderLineOrder>? orderLine;
   num? amountTotal;

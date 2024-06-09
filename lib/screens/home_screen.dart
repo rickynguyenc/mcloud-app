@@ -20,7 +20,7 @@ class HomeScreen extends HookConsumerWidget {
       routes: [
         ProductDashboardRoute(),
         NotificationProductRoute(),
-        CartRoute(),
+        CartRoute(isShowBack: false),
         FavouriteProductRoute(),
         PersonalViewRoute(),
       ],

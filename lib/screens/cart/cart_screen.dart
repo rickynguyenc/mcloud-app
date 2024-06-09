@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:mcloud/core/app_route/app_route.dart';
@@ -14,8 +15,10 @@ import '../../core/utils/widgets/shimmer_loading/common_simmer.dart';
 
 @RoutePage()
 class CartScreen extends HookConsumerWidget {
+  final bool isShowBack;
   final lstOrderLineChoosed = <OrderLine>[];
-  CartScreen();
+  late SwipeActionController _swipecontroller;
+  CartScreen(this.isShowBack);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final countMoney = useState(0);
@@ -26,6 +29,7 @@ class CartScreen extends HookConsumerWidget {
     final isRequesting = useState(false);
     final isChoosedAll = useState(false);
     useEffect(() {
+      _swipecontroller = SwipeActionController(selectedIndexPathsChangeCallback: (changedIndexPaths, selected, currentCount) {});
       ref.read(cartProvider.notifier).getCart().then((value) => isLoading.value = false);
       return null;
     }, const []);
@@ -43,12 +47,13 @@ class CartScreen extends HookConsumerWidget {
                       SizedBox(height: 48),
                       Row(
                         children: [
-                          IconButton(
-                            onPressed: () {
-                              AutoRouter.of(context).pop();
-                            },
-                            icon: Icon(Icons.arrow_back_ios),
-                          ),
+                          if (isShowBack)
+                            IconButton(
+                              onPressed: () {
+                                AutoRouter.of(context).pop();
+                              },
+                              icon: Icon(Icons.arrow_back_ios),
+                            ),
                           SizedBox(width: 16),
                           Expanded(
                             child: Container(
@@ -92,6 +97,7 @@ class CartScreen extends HookConsumerWidget {
                                       isRequesting.value = false;
                                     });
                                   },
+                                  _swipecontroller,
                                   (orderLine) {
                                     isRequesting.value = true;
                                     cartNotifier.updateCart(orderLine.id ?? 0, (orderLine.productUomQty ?? 0) + 1).then((value) {
@@ -122,6 +128,7 @@ class CartScreen extends HookConsumerWidget {
                             ),
                           ),
                         ),
+                      SizedBox(height: 64),
                     ],
                   )),
               bottomSheet: Container(
@@ -228,94 +235,147 @@ class ProductInCartElemnt extends HookConsumerWidget {
   final Function(OrderLine) onRemove;
   final Function(OrderLine) onAdd;
   final Function(OrderLine) onChoose;
-  const ProductInCartElemnt(this.orderLine, this.onRemove, this.onAdd, this.onChoose, {super.key});
+  final SwipeActionController? controller;
+  const ProductInCartElemnt(this.orderLine, this.onRemove, this.controller, this.onAdd, this.onChoose, {super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isShowDelete = useState(false);
     return Container(
       margin: EdgeInsets.only(bottom: 16),
-      child: Row(
-        children: [
-          Checkbox(
-            value: orderLine.isChoose ?? false,
-            onChanged: (value) {
-              orderLine.isChoose = !orderLine.isChoose!;
-              onChoose(orderLine);
-            },
-            activeColor: Color(0xffFF6C44),
-          ),
-          Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              image: DecorationImage(
-                image: NetworkImage('${Environment.apiUrl}${orderLine.productId?.avatarUrl ?? ''}'),
-                fit: BoxFit.cover,
+      child: SwipeActionCell(
+        controller: controller,
+        // Required!
+        key: ValueKey(orderLine),
+
+        // Animation default value below
+        // deleteAnimationDuration: 400,
+        selectedForegroundColor: Colors.black.withAlpha(30),
+        trailingActions: [
+          SwipeAction(
+              icon: Icon(
+                Icons.delete_outline_rounded,
+                size: 24,
+                color: Colors.white,
+              ),
+              performsFirstActionWithFullSwipe: false,
+              color: Color(0xFF055FA7),
+              closeOnTap: false,
+              nestedAction: SwipeNestedAction(title: "Xóa "),
+              onTap: (handler) async {
+                // await handler(true);
+              }),
+        ],
+        child: Row(
+          children: [
+            Checkbox(
+              value: orderLine.isChoose ?? false,
+              onChanged: (value) {
+                orderLine.isChoose = !orderLine.isChoose!;
+                onChoose(orderLine);
+              },
+              activeColor: Color(0xffFF6C44),
+            ),
+            Container(
+              width: 80,
+              height: 80,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                image: DecorationImage(
+                  image: NetworkImage('${Environment.apiUrl}${orderLine.productId?.avatarUrl ?? ''}'),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  orderLine.productId?.name ?? '',
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                ),
-                SizedBox(height: 6),
-                Text(
-                  'Bảo hành 12 tháng',
-                  style: TextStyle(
-                    color: Color(0xFF616161),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
+            SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    orderLine.productId?.name ?? '',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
-                ),
-                SizedBox(height: 12),
-                Row(
-                  children: [
-                    Text(
-                      '${orderLine.priceUnit} đ',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  SizedBox(height: 6),
+                  Text(
+                    'Bảo hành 12 tháng',
+                    style: TextStyle(
+                      color: Color(0xFF616161),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
                     ),
-                    Spacer(),
-                    Container(
-                      child: IconButton(
-                        onPressed: () {
-                          onRemove(orderLine);
-                        },
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(EdgeInsets.zero),
-                          fixedSize: MaterialStateProperty.all(Size(24, 24)),
-                        ),
-                        icon: Icon(Icons.remove),
+                  ),
+                  SizedBox(height: 12),
+                  Row(
+                    children: [
+                      Text(
+                        '${orderLine.priceUnit} đ',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                       ),
-                    ),
-                    Text(
-                      orderLine.productUomQty.toString(),
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                    ),
-                    Container(
-                      child: IconButton(
-                        onPressed: () {
-                          onAdd(orderLine);
-                        },
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(EdgeInsets.zero),
-                          fixedSize: MaterialStateProperty.all(Size(24, 24)),
+                      Spacer(),
+                      Container(
+                        child: IconButton(
+                          onPressed: () {
+                            onRemove(orderLine);
+                          },
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all(EdgeInsets.zero),
+                            fixedSize: MaterialStateProperty.all(Size(24, 24)),
+                          ),
+                          icon: Icon(Icons.remove),
                         ),
-                        icon: Icon(Icons.add),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      Text(
+                        orderLine.productUomQty.toString(),
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                      ),
+                      Container(
+                        child: IconButton(
+                          onPressed: () {
+                            onAdd(orderLine);
+                          },
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all(EdgeInsets.zero),
+                            fixedSize: MaterialStateProperty.all(Size(24, 24)),
+                          ),
+                          icon: Icon(Icons.add),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            // if (isShowDelete.value)
+            //   Container(
+            //     decoration: BoxDecoration(
+            //       color: Color(0xFFD83B35),
+            //       borderRadius: BorderRadius.circular(8),
+            //     ),
+            //     child: IconButton(
+            //       style: ButtonStyle(
+            //         padding: MaterialStateProperty.all(EdgeInsets.zero),
+            //         // fixedSize: MaterialStateProperty.all(Size(24, 24)),
+            //         shape: MaterialStateProperty.all(
+            //           RoundedRectangleBorder(
+            //             borderRadius: BorderRadius.circular(8),
+            //           ),
+            //         ),
+            //         minimumSize: MaterialStateProperty.all(Size(24, 24)),
+            //       ),
+            //       onPressed: () {
+            //         // ref.read(cartProvider.notifier).deleteCart(orderLine.id ?? 0);
+            //       },
+            //       icon: Icon(
+            //         Icons.delete,
+            //         color: Colors.white,
+            //         size: 24,
+            //       ),
+            //     ),
+            //   ),
+          ],
+        ),
       ),
     );
   }
