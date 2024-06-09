@@ -30,7 +30,7 @@ class CartScreen extends HookConsumerWidget {
       return null;
     }, const []);
     return isLoading.value
-        ? CommonSimmer()
+        ? Padding(padding: EdgeInsets.only(top: 48), child: CommonSimmer())
         : Stack(children: [
             Scaffold(
               resizeToAvoidBottomInset: false,

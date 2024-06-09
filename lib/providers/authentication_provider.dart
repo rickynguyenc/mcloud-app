@@ -21,6 +21,7 @@ class AuthProvider {
       final inputFormData = FormData.fromMap({'db': 'tabcom17', 'login': username, 'password': password});
       final result = await _authService.login(inputFormData);
       UserPreferences.instance.saveToken(result.accessToken ?? '');
+      UserPreferences.instance.saveUserId(result.uid ?? 0);
       return true;
     } on DioException catch (e) {
       CommonFunction.showSnackBar('Tài khoản hoặc mật khẩu không đúng', context, Colors.red);

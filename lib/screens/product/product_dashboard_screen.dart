@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mcloud/core/app_route/app_route.dart';
+import 'package:mcloud/core/utils/env.dart';
 import 'package:mcloud/core/utils/widgets/product_item_in_grid_widget.dart';
 import 'package:mcloud/core/utils/widgets/shimmer_loading/common_simmer.dart';
 import 'package:mcloud/core/utils/widgets/sliderbar_widget.dart';
 import 'package:mcloud/providers/home_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mcloud/providers/user_infor_provider.dart';
 
 @RoutePage()
 class ProductDashboardScreen extends HookConsumerWidget {
@@ -17,6 +19,7 @@ class ProductDashboardScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final lstProduct = ref.watch(homeProvider);
     final isLoading = useState(true);
+    final userInfor = ref.watch(userInforProvider);
     useEffect(() {
       ref.read(homeProvider.notifier).getListProducts().then((value) => isLoading.value = false);
       return null;
@@ -39,7 +42,12 @@ class ProductDashboardScreen extends HookConsumerWidget {
                         height: 50,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(50),
-                          child: Image.asset('assets/images/banner_login.png'),
+                          child: Image.network(
+                            '${Environment.apiUrl}/${userInfor.avatarUrl}',
+                            errorBuilder: (context, error, stackTrace) {
+                              return Image.asset('assets/images/banner_login.png');
+                            },
+                          ),
                         ),
                       ),
                       SizedBox(width: 14),
@@ -50,7 +58,7 @@ class ProductDashboardScreen extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Tuấn Nguyễn',
+                              userInfor.name ?? '',
                               style: TextStyle(
                                 color: Color(0xFF212121),
                                 fontSize: 20,

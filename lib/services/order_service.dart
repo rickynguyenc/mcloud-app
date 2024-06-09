@@ -16,7 +16,7 @@ abstract class OrderService {
   @POST('/api/sale_order')
   Future<AddOrderResponse> addToOrder(@Body() AddOrderDto body);
 
-  @GET('/api/sale_order')
+  @GET('/api/user/sale_order')
   Future<AllOrderResponse> getOrder();
 
   @GET('/api/sale_order/{id}')

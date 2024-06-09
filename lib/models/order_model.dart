@@ -43,8 +43,9 @@ class OrderItem {
   PartnerId? partnerId;
   List<OrderLineOrder>? orderLine;
   num? amountTotal;
+  dynamic status;
 
-  OrderItem({this.id, this.name, this.state, this.partnerId, this.orderLine, this.amountTotal});
+  OrderItem({this.id, this.name, this.state, this.partnerId, this.orderLine, this.amountTotal, this.status});
 
   OrderItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -58,6 +59,7 @@ class OrderItem {
       });
     }
     amountTotal = json['amount_total'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -72,6 +74,7 @@ class OrderItem {
       data['order_line'] = this.orderLine!.map((v) => v.toJson()).toList();
     }
     data['amount_total'] = this.amountTotal;
+    data['status'] = this.status;
     return data;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mcloud/models/user_infor_model.dart';
 import 'package:retrofit/http.dart';
 
 import '../core/app_dio.dart';
@@ -16,6 +17,8 @@ abstract class AuthService {
   Future<LoginResponse> login(@Body() FormData param);
   @POST('/api/res_users')
   Future<dynamic> register(@Body() Map<String, dynamic> data);
+  @GET('/api/res_users/{id}')
+  Future<UserInforResponse> getUserInfor(@Path('id') int id);
   @POST('/api/forgot_password')
   Future<dynamic> forgotPassword(@Body() Map<String, dynamic> data); //{"email":"chuongvlogger@gmail.com"}
   @POST('/api/reset_password')

@@ -59,6 +59,8 @@ class ProductItemInGridWidget extends HookConsumerWidget {
                     children: [
                       Text(
                         productElement.name ?? '',
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 10.09,

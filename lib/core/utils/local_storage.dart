@@ -1,9 +1,8 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe, unnecessary_null_comparison
 
 import 'dart:convert';
+import 'package:mcloud/models/user_infor_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../models/user_infor.dart';
 
 class SharedPrefConstant {
   SharedPrefConstant._();
@@ -16,6 +15,7 @@ class SharedPrefConstant {
   static const String rememberLogin = 'rememberLogin';
   static const String badge = 'badge';
   static const String lanLogin = 'lanLogin';
+  static const String userId = 'userId';
 }
 
 class UserPreferences {
@@ -86,13 +86,21 @@ class UserPreferences {
     return _sharedPreferences.getBool(SharedPrefConstant.rememberLogin);
   }
 
-  saveUserInfo(UserInfo? userInfo) {
+  Future<bool> saveUserId(int userId) {
+    return _sharedPreferences.setInt(SharedPrefConstant.userId, userId);
+  }
+
+  int? getUserId() {
+    return _sharedPreferences.getInt(SharedPrefConstant.userId);
+  }
+
+  saveUserInfo(UserInfor? userInfo) {
     _sharedPreferences.setString(SharedPrefConstant.userInfo, jsonEncode(userInfo?.toJson()));
   }
 
-  UserInfo? getUserInfo() {
+  UserInfor? getUserInfo() {
     final string = _sharedPreferences.getString(SharedPrefConstant.userInfo);
-    return string == null ? null : UserInfo.fromJson(jsonDecode(string));
+    return string == null ? null : UserInfor.fromJson(jsonDecode(string));
   }
 
   // Lưu token notify

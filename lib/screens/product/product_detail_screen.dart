@@ -137,29 +137,30 @@ class ProductDetailScreen extends HookConsumerWidget {
                                     height: 24,
                                   )),
                             ),
-                            Positioned(
-                              left: 30,
-                              top: 6,
-                              child: Container(
-                                width: 16,
-                                height: 16,
-                                alignment: Alignment.center,
-                                decoration: ShapeDecoration(
-                                  color: Color(0xFFD83B35),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
+                            if (allProductInCart.isNotEmpty)
+                              Positioned(
+                                left: 30,
+                                top: 6,
+                                child: Container(
+                                  width: 16,
+                                  height: 16,
+                                  alignment: Alignment.center,
+                                  decoration: ShapeDecoration(
+                                    color: Color(0xFFD83B35),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
                                   ),
-                                ),
-                                child: Text(
-                                  allProductInCart.isNotEmpty ? allProductInCart[0].orderLine?.length.toString() ?? '' : '',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w500,
+                                  child: Text(
+                                    allProductInCart.isNotEmpty ? allProductInCart[0].orderLine?.length.toString() ?? '' : '',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
                           ],
                         ),
                       ],

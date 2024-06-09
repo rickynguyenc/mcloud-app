@@ -1,13 +1,21 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:mcloud/core/app_route/app_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mcloud/core/utils/local_storage.dart';
+import 'package:mcloud/providers/user_infor_provider.dart';
 
 @RoutePage()
 class HomeScreen extends HookConsumerWidget {
   const HomeScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    useEffect(() {
+      final idUser = UserPreferences.instance.getUserId();
+      ref.read(userInforProvider.notifier).getUserInfor(idUser ?? 0);
+      return null;
+    }, []);
     return AutoTabsScaffold(
       routes: [
         ProductDashboardRoute(),
