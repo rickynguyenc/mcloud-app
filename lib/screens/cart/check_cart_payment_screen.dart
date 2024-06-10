@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:mcloud/core/app_route/app_route.dart';
 import 'package:mcloud/core/utils/env.dart';
+import 'package:mcloud/core/utils/extension/common_function.dart';
 import 'package:mcloud/core/utils/widgets/loading_mark.dart';
 import 'package:mcloud/models/cart_model.dart' as cart;
 import 'package:mcloud/models/order_model.dart';
@@ -83,10 +84,10 @@ class CheckCartPaymentScreen extends HookConsumerWidget {
                             if (orderLine.productUomQty == 0) {
                               return;
                             }
-                            cartNotifier.updateCart(orderLine.id ?? 0, (orderLine.productUomQty ?? 0) - 1);
+                            cartNotifier.updateCart(orderLine.productId?.id ?? 0, (orderLine.productUomQty ?? 0) - 1);
                           },
                           (orderLine) {
-                            cartNotifier.updateCart(orderLine.id ?? 0, (orderLine.productUomQty ?? 0) + 1);
+                            cartNotifier.updateCart(orderLine.productId?.id ?? 0, (orderLine.productUomQty ?? 0) + 1);
                           },
                         );
                       },
@@ -150,17 +151,23 @@ class CheckCartPaymentScreen extends HookConsumerWidget {
                 child: ElevatedButton(
                   onPressed: () async {
                     isLoading.value = true;
-                    final orderInput = AddOrderDto(againLink: 'http://google.com', orderLine: [
-                      OrderLineDto(
-                        productTemplateId: 14,
-                        productTemplateAttributeValueIds: [],
-                        productUomQty: 1,
-                        priceUnit: 90000,
-                      )
+                    final orderInput = AddOrderDto(againLink: 'https://shop-mobifone.tabcom.vn/order-detail/', orderLine: [
+                      ...lstOrderLineChoosed
+                          .map((e) => OrderLineDto(
+                                productTemplateId: e.id ?? 0,
+                                productTemplateAttributeValueIds: e.productId?.productTemplateAttributeValueIds ?? [],
+                                productUomQty: e.productUomQty ?? 0,
+                                priceUnit: e.priceUnit ?? 0,
+                              ))
+                          .toList()
                     ]);
                     final result = await ref.read(orderProvider.notifier).addToOrder(orderInput);
                     isLoading.value = false;
-                    context.router.push(PaymentViewRoute(linkOnePay: result?.urlPayment ?? ''));
+                    if (result?.urlPayment != null && result?.urlPayment != '') {
+                      context.router.push(PaymentViewRoute(linkOnePay: result?.urlPayment ?? ''));
+                    } else {
+                      CommonFunction.showSnackBar('Xảy ra lỗi trong quá trình tạo đơn hàng', context, Colors.red);
+                    }
                   },
                   child: Text('Thanh toán'),
                   style: ElevatedButton.styleFrom(

@@ -49,7 +49,7 @@ class _PaymentViewScreenState extends State<PaymentViewScreen> {
             debugPrint('Page finished loading: $url');
           },
           onWebResourceError: (WebResourceError error) {
-            Navigator.pop(context);
+            // Navigator.pop(context);
           },
           onNavigationRequest: (NavigationRequest request) {
             if (request.url.startsWith('https://www.youtube.com/')) {
@@ -60,17 +60,17 @@ class _PaymentViewScreenState extends State<PaymentViewScreen> {
             return NavigationDecision.navigate;
           },
           onUrlChange: (UrlChange change) {
-            if ((change.url ?? '').contains('vpc_Message=Approved')) {
-              //TODO: Update status order to success
-            }
-            if ((change.url ?? '').contains('http://api-shop-mobifone.tabcom.vn/payment/checkout')) {
-              Uri uri = Uri.parse(change.url!);
-              String? orderInfo = uri.queryParameters['vpc_OrderInfo'];
-              final idOrder = orderInfo?.substring(3);
-              if (idOrder != null) {
-                AutoRouter.of(context).replace(DetailOrderRoute(orderId: int.parse(idOrder ?? '')));
-              }
-            }
+            // if ((change.url ?? '').contains('vpc_Message=Approved')) {
+            //   //TODO: Update status order to success
+            // }
+            // if ((change.url ?? '').contains('http://api-shop-mobifone.tabcom.vn/payment/checkout')) {
+            //   Uri uri = Uri.parse(change.url!);
+            //   String? orderInfo = uri.queryParameters['vpc_OrderInfo'];
+            //   final idOrder = orderInfo?.substring(3);
+            //   if (idOrder != null) {
+            //     AutoRouter.of(context).replace(DetailOrderRoute(orderId: int.parse(idOrder ?? '')));
+            //   }
+            // }
             debugPrint('url change to ${change.url}');
           },
         ),

@@ -539,7 +539,7 @@ class ProductDetailScreen extends HookConsumerWidget {
                                 productTemplateAttributeValueIds: detailProduct.attributeLineIds
                                     ?.map((e) => ProductTemplateAttributeValueIdsDto(
                                           attributeId: e.attributeId?.id,
-                                          productAttributeValueId: e.id,
+                                          productAttributeValueId: e.valueIds?[0].id,
                                         ))
                                     .toList(),
                                 priceUnit: detailProduct.listPrice,
@@ -589,7 +589,7 @@ class ProductDetailScreen extends HookConsumerWidget {
                                 productTemplateAttributeValueIds: detailProduct.attributeLineIds
                                     ?.map((e) => ProductTemplateAttributeValueIdsDto(
                                           attributeId: e.attributeId?.id,
-                                          productAttributeValueId: e.id,
+                                          productAttributeValueId: e.valueIds?[0].id,
                                         ))
                                     .toList(),
                                 priceUnit: detailProduct.listPrice,

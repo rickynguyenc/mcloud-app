@@ -93,14 +93,14 @@ class CartScreen extends HookConsumerWidget {
                                       return;
                                     }
                                     isRequesting.value = true;
-                                    cartNotifier.updateCart(orderLine.id ?? 0, (orderLine.productUomQty ?? 0) - 1).then((value) {
+                                    cartNotifier.updateCart(orderLine.productId?.id ?? 0, (orderLine.productUomQty ?? 0) - 1).then((value) {
                                       isRequesting.value = false;
                                     });
                                   },
                                   _swipecontroller,
                                   (orderLine) {
                                     isRequesting.value = true;
-                                    cartNotifier.updateCart(orderLine.id ?? 0, (orderLine.productUomQty ?? 0) + 1).then((value) {
+                                    cartNotifier.updateCart(orderLine.productId?.id ?? 0, (orderLine.productUomQty ?? 0) + 1).then((value) {
                                       isRequesting.value = false;
                                     });
                                   },
@@ -119,6 +119,12 @@ class CartScreen extends HookConsumerWidget {
                                         countMoney.value -= orderLine.priceUnit?.round() ?? 0;
                                       }
                                     }
+                                  },
+                                  (orderLine) {
+                                    isRequesting.value = true;
+                                    cartNotifier.updateCart(orderLine.productId?.id ?? 0, (orderLine.productUomQty ?? 0) - 1).then((value) {
+                                      isRequesting.value = false;
+                                    });
                                   },
                                 );
                               },
@@ -235,8 +241,9 @@ class ProductInCartElemnt extends HookConsumerWidget {
   final Function(OrderLine) onRemove;
   final Function(OrderLine) onAdd;
   final Function(OrderLine) onChoose;
+  final Function(OrderLine) onDelete;
   final SwipeActionController? controller;
-  const ProductInCartElemnt(this.orderLine, this.onRemove, this.controller, this.onAdd, this.onChoose, {super.key});
+  const ProductInCartElemnt(this.orderLine, this.onRemove, this.controller, this.onAdd, this.onChoose, this.onDelete, {super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isShowDelete = useState(false);
@@ -259,9 +266,10 @@ class ProductInCartElemnt extends HookConsumerWidget {
               ),
               performsFirstActionWithFullSwipe: false,
               color: Color(0xFF055FA7),
-              closeOnTap: false,
+              closeOnTap: true,
               nestedAction: SwipeNestedAction(title: "Xóa "),
               onTap: (handler) async {
+                onDelete(orderLine);
                 // await handler(true);
               }),
         ],
@@ -310,7 +318,7 @@ class ProductInCartElemnt extends HookConsumerWidget {
                   Row(
                     children: [
                       Text(
-                        '${orderLine.priceUnit} đ',
+                        '${NumberFormat('#,###', 'en_US').format(orderLine.priceUnit)} đ',
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                       ),
                       Spacer(),
@@ -327,7 +335,7 @@ class ProductInCartElemnt extends HookConsumerWidget {
                         ),
                       ),
                       Text(
-                        orderLine.productUomQty.toString(),
+                        orderLine.productUomQty?.round().toString() ?? '0',
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                       ),
                       Container(
