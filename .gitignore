@@ -122,7 +122,6 @@ coverage/
 # .env.development
 # .env.production
 *.cc
-*.h
 *.cmake
 pubspec.lock
 macos/Flutter/GeneratedPluginRegistrant.swift

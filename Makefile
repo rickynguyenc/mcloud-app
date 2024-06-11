@@ -41,11 +41,11 @@ build-android-prd:
 
 .PHONY: build-ios-dev
 build-ios-dev:
-	flutter build ios --no-codesign --flavor development --dart-define=FLAVOR=development --target lib/main.dart
+	flutter build ios --no-codesign development --dart-define=FLAVOR=development --target lib/main.dart
 
 .PHONY: build-ios-prd
 build-ios-prd:
-	flutter build ios --release --no-codesign --flavor production --dart-define=FLAVOR=production --target lib/main.dart
+	flutter build ios --release --no-codesign production --dart-define=FLAVOR=production --target lib/main.dart
 
 .PHONY: unit-test
 unit-test:
