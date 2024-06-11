@@ -87,8 +87,8 @@ class CartScreen extends HookConsumerWidget {
                               controller: scrollCtrlMain,
                               itemBuilder: (ctx, index) {
                                 return ProductInCartElemnt(
-                                  cartLstProduct[0].orderLine![index],
-                                  (orderLine) {
+                                  orderLine: cartLstProduct[0].orderLine![index],
+                                  onRemove: (orderLine) {
                                     if (orderLine.productUomQty == 0) {
                                       return;
                                     }
@@ -97,32 +97,32 @@ class CartScreen extends HookConsumerWidget {
                                       isRequesting.value = false;
                                     });
                                   },
-                                  _swipecontroller,
-                                  (orderLine) {
+                                  controller: _swipecontroller,
+                                  onAdd: (orderLine) {
                                     isRequesting.value = true;
                                     cartNotifier.updateCart(orderLine.productId?.id ?? 0, (orderLine.productUomQty ?? 0) + 1).then((value) {
                                       isRequesting.value = false;
                                     });
                                   },
-                                  (orderLine) {
+                                  onChoose: (orderLine) {
                                     if (orderLine.productUomQty == 0) {
                                       return;
                                     }
                                     if (orderLine.isChoose == true) {
                                       if (!lstOrderLineChoosed.contains(orderLine)) {
                                         lstOrderLineChoosed.add(orderLine);
-                                        countMoney.value += orderLine.priceUnit?.round() ?? 0;
+                                        countMoney.value += ((orderLine.priceUnit ?? 0) * (orderLine.productUomQty ?? 0)).round();
                                       }
                                     } else {
                                       if (lstOrderLineChoosed.contains(orderLine)) {
                                         lstOrderLineChoosed.remove(orderLine);
-                                        countMoney.value -= orderLine.priceUnit?.round() ?? 0;
+                                        countMoney.value -= ((orderLine.priceUnit ?? 0) * (orderLine.productUomQty ?? 0)).round();
                                       }
                                     }
                                   },
-                                  (orderLine) {
+                                  onDelete: (orderLine) {
                                     isRequesting.value = true;
-                                    cartNotifier.updateCart(orderLine.productId?.id ?? 0, (orderLine.productUomQty ?? 0) - 1).then((value) {
+                                    cartNotifier.updateCart(orderLine.productId?.id ?? 0, 0).then((value) {
                                       isRequesting.value = false;
                                     });
                                   },
@@ -164,7 +164,7 @@ class CartScreen extends HookConsumerWidget {
                           element.isChoose = isChoosedAll.value;
                           if (isChoosedAll.value) {
                             lstOrderLineChoosed.add(element);
-                            countMoney.value += element.priceUnit?.round() ?? 0;
+                            countMoney.value += ((element.priceUnit ?? 0) * (element.productUomQty ?? 0)).round();
                           }
                         });
                       },
@@ -243,7 +243,7 @@ class ProductInCartElemnt extends HookConsumerWidget {
   final Function(OrderLine) onChoose;
   final Function(OrderLine) onDelete;
   final SwipeActionController? controller;
-  const ProductInCartElemnt(this.orderLine, this.onRemove, this.controller, this.onAdd, this.onChoose, this.onDelete, {super.key});
+  const ProductInCartElemnt({required this.orderLine, required this.onRemove, this.controller, required this.onAdd, required this.onChoose, required this.onDelete, super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isShowDelete = useState(false);

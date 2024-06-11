@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:mcloud/core/app_route/app_route.dart';
 import 'package:mcloud/core/utils/env.dart';
+import 'package:mcloud/core/utils/widgets/search_widget.dart';
 import 'package:mcloud/core/utils/widgets/shimmer_loading/common_simmer.dart';
 import 'package:mcloud/models/order_model.dart';
 import 'package:mcloud/providers/order_provider.dart';
@@ -23,9 +24,17 @@ class BuyHistoryScreen extends HookConsumerWidget {
     final orderAllData = ref.watch(orderProvider.notifier).lstOrderItem;
     final tabNow = useState(0);
     final lstStatus = ['wait', 'paid', 'cancel error'];
+    final isShowSearch = useState(false);
+    final filterData = useState<List<OrderItem?>>([]);
     useEffect(() {
       ref.read(orderProvider).getOrder().then((value) {
         isLoading.value = false;
+        value.forEach((element) {
+          if (lstStatus[0].contains(element?.status ?? '')) {
+            countMoney += ((element?.amountTotal ?? 0).round());
+          }
+        });
+        filterData.value = value;
       });
       return null;
     }, const []);
@@ -39,38 +48,59 @@ class BuyHistoryScreen extends HookConsumerWidget {
                 body: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 48),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
+                    Container(
+                      color: Color(0xffF5F5F5),
+                      padding: EdgeInsets.only(left: 16, right: 16, top: 48, bottom: 16),
                       child: Row(
                         children: [
                           if (isShowBack)
                             IconButton(
                               onPressed: () {
-                                AutoRouter.of(context).pop();
+                                if (isShowSearch.value) {
+                                  isShowSearch.value = false;
+                                  filterData.value = orderAllData;
+                                } else {
+                                  AutoRouter.of(context).pop();
+                                }
                               },
                               icon: Icon(Icons.arrow_back_ios),
                             ),
                           SizedBox(width: 16),
                           Expanded(
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Lịch sử đơn hàng',
-                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                          ),
+                              child: isShowSearch.value
+                                  ? AnimatedSize(
+                                      duration: Duration(microseconds: 1000),
+                                      child: SearchBarWidget(
+                                        textSearch: '',
+                                        hintText: 'Search...',
+                                        onChanged: (value) {
+                                          filterData.value = orderAllData.where((element) => element?.orderLine?[0].productId?.name?.toLowerCase().contains(value.toLowerCase()) ?? false).toList();
+                                        },
+                                        onSubmit: (value) {},
+                                      ))
+                                  : AnimatedSize(
+                                      duration: Duration(microseconds: 1000),
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          'Lịch sử đơn hàng',
+                                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                                        ),
+                                      ),
+                                    )),
                           SizedBox(width: 16),
                           // Cart button
-                          IconButton(
-                            onPressed: () {},
-                            icon: SvgPicture.asset(
-                              'assets/icons/search-normal.svg',
-                              width: 24,
-                              height: 24,
+                          if (isShowSearch.value != true)
+                            IconButton(
+                              onPressed: () {
+                                isShowSearch.value = true;
+                              },
+                              icon: SvgPicture.asset(
+                                'assets/icons/search-normal.svg',
+                                width: 24,
+                                height: 24,
+                              ),
                             ),
-                          ),
                         ],
                       ),
                     ),
@@ -264,14 +294,14 @@ class BuyHistoryScreen extends HookConsumerWidget {
                                   ListView.builder(
                                 controller: scrollCtrlMain,
                                 itemBuilder: (ctx, index) {
-                                  return lstStatus[tabNow.value].contains(orderAllData[index]?.status ?? '')
+                                  return lstStatus[tabNow.value].contains(filterData.value[index]?.status ?? '')
                                       ? ProductInBuyHistoryElemnt(
-                                          orderAllData[index] ?? OrderItem(),
+                                          filterData.value[index] ?? OrderItem(),
                                           tabNow.value,
                                         )
                                       : SizedBox.shrink();
                                 },
-                                itemCount: orderAllData.length,
+                                itemCount: filterData.value.length,
                                 shrinkWrap: true,
                                 // physics: NeverScrollableScrollPhysics(),
                               ),

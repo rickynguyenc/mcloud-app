@@ -49,7 +49,7 @@ class _PaymentViewScreenState extends State<PaymentViewScreen> {
             debugPrint('Page finished loading: $url');
           },
           onWebResourceError: (WebResourceError error) {
-            // Navigator.pop(context);
+            Navigator.pop(context);
           },
           onNavigationRequest: (NavigationRequest request) {
             if (request.url.startsWith('https://www.youtube.com/')) {

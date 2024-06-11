@@ -5,6 +5,7 @@ import 'package:mcloud/core/app_route/app_route.dart';
 import 'package:mcloud/core/utils/env.dart';
 import 'package:mcloud/core/utils/widgets/search_widget.dart';
 import 'package:mcloud/core/utils/widgets/shimmer_loading/common_simmer.dart';
+import 'package:mcloud/models/home_model.dart';
 import 'package:mcloud/providers/home_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -16,8 +17,12 @@ class SearchProductScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final lstProduct = ref.watch(homeProvider);
     final isLoading = useState(true);
+    final filterLstProduct = useState(<Product>[]);
     useEffect(() {
-      ref.read(homeProvider.notifier).getListProducts().then((value) => isLoading.value = false);
+      ref.read(homeProvider.notifier).getListProducts().then((value) {
+        isLoading.value = false;
+        filterLstProduct.value = value;
+      });
       return null;
     }, const []);
     return Scaffold(
@@ -54,7 +59,9 @@ class SearchProductScreen extends HookConsumerWidget {
                 child: SearchBarWidget(
                   textSearch: '',
                   hintText: 'Search...',
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    filterLstProduct.value = lstProduct.where((element) => element.name!.toLowerCase().contains(value.toLowerCase())).toList();
+                  },
                   onSubmit: (value) {},
                 ),
               ),
@@ -115,7 +122,7 @@ class SearchProductScreen extends HookConsumerWidget {
             Expanded(
               child: isLoading.value
                   ? CommonSimmer()
-                  : lstProduct.isEmpty
+                  : filterLstProduct.value.isEmpty
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -172,13 +179,13 @@ class SearchProductScreen extends HookConsumerWidget {
                                       crossAxisSpacing: 16,
                                       mainAxisSpacing: 16,
                                     ),
-                                    itemCount: lstProduct.length, // Replace with your list of games
+                                    itemCount: filterLstProduct.value.length, // Replace with your list of games
                                     itemBuilder: (BuildContext context, int index) {
                                       return Material(
                                         color: Colors.transparent,
                                         child: InkWell(
                                           onTap: () {
-                                            AutoRouter.of(context).push(ProductDetailRoute(productId: int.parse(lstProduct[index].id.toString())));
+                                            AutoRouter.of(context).push(ProductDetailRoute(productId: int.parse(filterLstProduct.value[index].id.toString())));
                                           },
                                           child: Container(
                                             // height: 48,
@@ -195,7 +202,7 @@ class SearchProductScreen extends HookConsumerWidget {
                                                   child: ClipRRect(
                                                     borderRadius: BorderRadius.circular(10),
                                                     child: Image.network(
-                                                      '${Environment.apiUrl}/${lstProduct[index].avatarUrl ?? ''}',
+                                                      '${Environment.apiUrl}/${filterLstProduct.value[index].avatarUrl ?? ''}',
                                                       errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                                                         return Image(
                                                           image: AssetImage('assets/images/banner_home.png'),
@@ -214,7 +221,7 @@ class SearchProductScreen extends HookConsumerWidget {
                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                       children: [
                                                         Text(
-                                                          lstProduct[index].name ?? '',
+                                                          filterLstProduct.value[index].name ?? '',
                                                           maxLines: 3,
                                                           overflow: TextOverflow.ellipsis,
                                                           style: TextStyle(

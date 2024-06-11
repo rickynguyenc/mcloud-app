@@ -15,14 +15,14 @@ class OrderNotifier extends ChangeNotifier {
   DetailOrder _detailOrder = DetailOrder();
   DetailOrder get detailOrder => _detailOrder;
   late final _orderService = ref.read(orderServiceProvider);
-  Future<bool> getOrder() async {
+  Future<List<OrderItem?>> getOrder() async {
     try {
       final response = await _orderService.getOrder();
       _lstOrderItem = response.result ?? [];
       notifyListeners();
-      return true;
+      return _lstOrderItem;
     } catch (e) {
-      return false;
+      return [];
     }
   }
 

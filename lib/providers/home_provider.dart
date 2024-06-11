@@ -11,12 +11,13 @@ class HomeProvider extends StateNotifier<List<Product>> {
   final Ref ref;
   HomeProvider(this.ref) : super([]);
   late final _homeService = ref.read(homeServiceProvider);
-  Future<void> getListProducts() async {
+  Future<List<Product>> getListProducts() async {
     try {
       final result = await _homeService.getListProducts();
       state = result.result ?? [];
+      return state;
     } catch (e) {
-      print(e);
+      return [];
     }
   }
 }

@@ -351,6 +351,131 @@ class PersonalViewScreen extends HookConsumerWidget {
                       ],
                     ),
                     SizedBox(height: 32),
+                    Row(
+                      children: [
+                        Container(
+                          width: 40,
+                          height: 40,
+                          decoration: ShapeDecoration(
+                            color: Color(0xFFE6F4FF),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          alignment: Alignment.center,
+                          child: SvgPicture.asset('assets/icons/like.svg', width: 24, height: 24),
+                        ),
+                        SizedBox(width: 16),
+                        Text(
+                          'Yêu thích',
+                          style: TextStyle(
+                            color: Color(0xFF212121),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Spacer(),
+                        Container(
+                          width: 24,
+                          height: 24,
+                          child: IconButton(
+                            onPressed: () {
+                              context.router.push(FavouriteProductRoute());
+                            },
+                            icon: Icon(
+                              Icons.arrow_forward_ios,
+                              color: Color(0xFF9CA3AF),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 32),
+                    Row(
+                      children: [
+                        Container(
+                          width: 40,
+                          height: 40,
+                          decoration: ShapeDecoration(
+                            color: Color(0xFFE6F4FF),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          alignment: Alignment.center,
+                          child: SvgPicture.asset('assets/icons/card-tick.svg', width: 24, height: 24),
+                        ),
+                        SizedBox(width: 16),
+                        Text(
+                          'Phương thức thanh toán',
+                          style: TextStyle(
+                            color: Color(0xFF212121),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Spacer(),
+                        Container(
+                          width: 24,
+                          height: 24,
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.arrow_forward_ios,
+                              color: Color(0xFF9CA3AF),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 32),
+                    Row(
+                      children: [
+                        Container(
+                          width: 40,
+                          height: 40,
+                          decoration: ShapeDecoration(
+                            color: Color(0xFFE6F4FF),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          alignment: Alignment.center,
+                          child: SvgPicture.asset('assets/icons/setting-2.svg', width: 24, height: 24),
+                        ),
+                        SizedBox(width: 16),
+                        Text(
+                          'Cài đặt tài khoản',
+                          style: TextStyle(
+                            color: Color(0xFF212121),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Spacer(),
+                        Container(
+                          width: 24,
+                          height: 24,
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.arrow_forward_ios,
+                              color: Color(0xFF9CA3AF),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 32),
                     Text(
                       'TRUNG TÂM TRỢ GIÚP',
                       style: TextStyle(
@@ -359,6 +484,94 @@ class PersonalViewScreen extends HookConsumerWidget {
                         fontWeight: FontWeight.w700,
                         letterSpacing: 2,
                       ),
+                    ),
+                    SizedBox(height: 32),
+                    Row(
+                      children: [
+                        Container(
+                          width: 40,
+                          height: 40,
+                          decoration: ShapeDecoration(
+                            color: Color(0xFFE6F4FF),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          alignment: Alignment.center,
+                          child: SvgPicture.asset('assets/icons/quote-up.svg', width: 24, height: 24),
+                        ),
+                        SizedBox(width: 16),
+                        InkWell(
+                          onTap: () {},
+                          child: Text(
+                            'Đánh giá',
+                            style: TextStyle(
+                              color: Color(0xFF212121),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        Spacer(),
+                        Container(
+                          width: 24,
+                          height: 24,
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.arrow_forward_ios,
+                              color: Color(0xFF9CA3AF),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 32),
+                    Row(
+                      children: [
+                        Container(
+                          width: 40,
+                          height: 40,
+                          decoration: ShapeDecoration(
+                            color: Color(0xFFE6F4FF),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          alignment: Alignment.center,
+                          child: SvgPicture.asset('assets/icons/shopping-cart.svg', width: 24, height: 24),
+                        ),
+                        SizedBox(width: 16),
+                        InkWell(
+                          onTap: () {},
+                          child: Text(
+                            'Trung tâm trợ giúp',
+                            style: TextStyle(
+                              color: Color(0xFF212121),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        Spacer(),
+                        Container(
+                          width: 24,
+                          height: 24,
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.arrow_forward_ios,
+                              color: Color(0xFF9CA3AF),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        )
+                      ],
                     ),
                     SizedBox(height: 32),
                     Row(

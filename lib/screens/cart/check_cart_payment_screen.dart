@@ -25,7 +25,8 @@ class CheckCartPaymentScreen extends HookConsumerWidget {
     final isLoading = useState(false);
     useEffect(() {
       lstOrderLineChoosed.forEach((element) {
-        totalValue.value += element.priceUnit?.round() ?? 0;
+        final moneyEle = (element.priceUnit ?? 0) * (element.productUomQty ?? 0);
+        totalValue.value += moneyEle.round();
       });
       return null;
     }, []);
@@ -155,7 +156,8 @@ class CheckCartPaymentScreen extends HookConsumerWidget {
                       ...lstOrderLineChoosed
                           .map((e) => OrderLineDto(
                                 productTemplateId: e.id ?? 0,
-                                productTemplateAttributeValueIds: e.productId?.productTemplateAttributeValueIds ?? [],
+                                // productTemplateAttributeValueIds: e.productId?.productTemplateAttributeValueIds ?? [],
+                                productTemplateAttributeValueIds: [],
                                 productUomQty: e.productUomQty ?? 0,
                                 priceUnit: e.priceUnit ?? 0,
                               ))
