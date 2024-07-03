@@ -13,7 +13,7 @@ final orderServiceProvider = Provider<OrderService>((ref) {
 abstract class OrderService {
   factory OrderService(Ref ref) => _OrderService(ref.read(dioProvider));
 
-  @POST('/api/sale_order')
+  @POST('/m/api/sale_order')
   Future<AddOrderResponse> addToOrder(@Body() AddOrderDto body);
 
   @GET('/api/user/sale_order')
